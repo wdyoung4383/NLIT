@@ -559,8 +559,7 @@
   <div class="tabs" id="tabs-row">
     <div class="tab active" onclick="switchTab('overview')">Overview</div>
     <div class="tab" onclick="switchTab('clients')">By Client</div>
-    <div class="tab" onclick="switchTab('types')">By Type</div>
-    <div class="tab" onclick="switchTab('attention')">Needs Attention</div>
+
     <div class="tab" onclick="switchTab('nolabor')">No Labor</div>
     <div class="tab" onclick="switchTab('trending')">Trending</div>
     <div class="tab" onclick="switchTab('health')">Client Health</div>
@@ -639,69 +638,9 @@
     </div>
   </div>
 
-  <!-- BY TYPE -->
-  <div id="tab-types" class="panel">
-    <div class="table-wrap" style="border-radius:0 14px 14px 14px; padding:22px;">
-      <div class="section-title">By Agreement Type</div>
-      <table>
-        <thead>
-          <tr>
-            <th style="width:32%">Agreement Type</th>
-            <th class="num">Revenue</th>
-            <th class="num">Labor Cost</th>
-            <th class="num">Gross Profit</th>
-            <th class="num">GP Margin</th>
-            <th class="num">Billable Hrs</th>
-            <th class="num">Clients</th>
-          </tr>
-        </thead>
-        <tbody id="type-tbody"></tbody>
-      </table>
-      <div class="section-title" style="margin-top:28px">Service Agreement Blended (L&amp;S vs Managed/Support/BDR)</div>
-      <table>
-        <thead>
-          <tr>
-            <th style="width:32%">Bucket</th>
-            <th class="num">Revenue</th>
-            <th class="num">Labor Cost</th>
-            <th class="num">Gross Profit</th>
-            <th class="num">GP Margin</th>
-            <th class="num">Billable Hrs</th>
-            <th class="num">Clients</th>
-          </tr>
-        </thead>
-        <tbody id="type-blended-tbody"></tbody>
-      </table>
-    </div>
-  </div>
 
-  <!-- NEEDS ATTENTION -->
-  <div id="tab-attention" class="panel">
-    <div class="table-wrap" style="border-radius:0 14px 14px 14px; padding:22px;">
-      <div class="section-title">Negative GP Agreements</div>
-      <table>
-        <thead>
-          <tr>
-            <th>Client</th><th>Type</th>
-            <th class="num">GP</th><th class="num">Revenue</th>
-            <th class="num">Labor Cost</th><th class="num">Product Cost</th>
-          </tr>
-        </thead>
-        <tbody id="neg-tbody"></tbody>
-      </table>
-      <div class="section-title">Runaway Remote Support (time cost &gt; revenue)</div>
-      <table>
-        <thead>
-          <tr>
-            <th>Client</th>
-            <th class="num">Revenue</th><th class="num">Labor Cost</th>
-            <th class="num">GP</th><th class="num">Hours</th>
-          </tr>
-        </thead>
-        <tbody id="rs-tbody"></tbody>
-      </table>
-    </div>
-  </div>
+
+
 
   <!-- NO LABOR -->
   <div id="tab-nolabor" class="panel">
@@ -798,7 +737,6 @@
           <option value="priceless">Priceless (cost, no price)</option>
           <option value="costless">Costless (price, no cost)</option>
           <option value="neg_margin">Negative Margin</option>
-          <option value="attention">Needs Attention</option>
 
         </select>
         <label>Product Class</label>
@@ -1388,7 +1326,6 @@ function renderAdditionsKPIs(){
   const priceless = ADDITIONS_DATA.filter(r=>r.flags.includes('priceless'));
   const costless  = ADDITIONS_DATA.filter(r=>r.flags.includes('costless'));
   const negm      = ADDITIONS_DATA.filter(r=>r.flags.includes('neg_margin'));
-  const attn      = ADDITIONS_DATA.filter(r=>r.needs_attn);
   const pricelessCost = priceless.reduce((a,r)=>a+r.ext_cost,0);
   const costlessRev   = costless.reduce((a,r)=>a+r.ext_price,0);
   const negmLoss      = negm.reduce((a,r)=>a+Math.abs(r.margin),0);
@@ -1408,19 +1345,14 @@ function renderAdditionsKPIs(){
       <div class="audit-kpi-value">${negm.length}</div>
       <div class="audit-kpi-sub">Cost exceeds price &middot; ${Math.round(negmLoss).toLocaleString()} loss</div>
     </div>
-    <div class="audit-kpi kpi-attn">
-      <div class="audit-kpi-label">Needs Attention</div>
-      <div class="audit-kpi-value">${attn.length}</div>
-      <div class="audit-kpi-sub">Flagged in source data</div>
-    </div>`;
+`;
 }
 renderAdditionsKPIs();
 
-function flagLabel(flags, needs_attn){
+function flagLabel(flags){
   if(flags.includes('priceless'))  return ['priceless','Priceless'];
   if(flags.includes('costless'))   return ['costless','Costless'];
   if(flags.includes('neg_margin')) return ['neg_margin','Neg Margin'];
-  if(needs_attn)                   return ['attention','Attention'];
   return ['clean','Clean'];
 }
 
@@ -1429,11 +1361,10 @@ function renderAdditionsTable(){
   const typeFilter = document.getElementById('audit-type').value;
   const coFilter   = document.getElementById('audit-company').value;
   // Default (all) shows only flagged records -- clean is excluded
-  let data = ADDITIONS_DATA.filter(r=>r.flags.length>0||r.needs_attn);
+  let data = ADDITIONS_DATA.filter(r=>r.flags.length>0);
   if(flagFilter==='priceless')  data=data.filter(r=>r.flags.includes('priceless'));
   else if(flagFilter==='costless')   data=data.filter(r=>r.flags.includes('costless'));
   else if(flagFilter==='neg_margin') data=data.filter(r=>r.flags.includes('neg_margin'));
-  else if(flagFilter==='attention')  data=data.filter(r=>r.needs_attn);
   if(typeFilter!=='all') data=data.filter(r=>r.product_class===typeFilter);
   if(coFilter!=='all')   data=data.filter(r=>r.co===coFilter);
   const billFilter = document.getElementById('audit-bill').value;
@@ -1443,7 +1374,7 @@ function renderAdditionsTable(){
   if(!data.length){tbody.innerHTML='<tr><td colspan="10" style="text-align:center;padding:24px;color:var(--text-dim)">No additions match the selected filters.</td></tr>';return;}
   const fmtN=n=>n===0?'—':'$'+Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
   tbody.innerHTML=data.map(r=>{
-    const [fKey,fLabel]=flagLabel(r.flags,r.needs_attn);
+    const [fKey,fLabel]=flagLabel(r.flags);
     const mCls=r.margin<0?'neg':r.margin===0?'warn':'pos';
     return `<tr class="audit-row-${fKey}">
       <td style="font-size:12px">${r.co}</td>
@@ -1473,7 +1404,6 @@ function getAdditionFlags(coName){
     if(r.flags.includes('priceless'))  counts.priceless++;
     else if(r.flags.includes('costless'))   counts.costless++;
     else if(r.flags.includes('neg_margin')) counts.neg_margin++;
-    if(r.needs_attn) counts.attention++;
   });
   return counts;
 }
