@@ -821,12 +821,10 @@ function switchMonth(m) {
   buildAggregates();
   renderMetrics();
   renderClientTable();
-  renderTypeTable();
-  renderAttention();
   renderNoLabor();
   // re-render overview charts for the new month
   setTimeout(renderOverviewCharts, 50);
-  document.querySelector('.header-sub').textContent = 'Agreement Gross Profit Analysis · Delivered for GoodSuite · ' + MONTH_LABELS[m];
+  document.querySelector('.header-sub').textContent = 'Agreement Gross Profit Analysis · Delivered for NLIT · ' + MONTH_LABELS[m];
 }
 
 function typeColor(t){
@@ -1020,9 +1018,7 @@ function renderTypeTable(){
     </tr>`,
   ].join('');
 }
-renderTypeTable();
-
-function renderAttention(){
+function renderAttention_DISABLED(){
   const negLines=raw.filter(r=>r.gp<0&&(r.rev>0||r.timeCost>0||r.prodCost>0)).sort((a,b)=>a.gp-b.gp);
   document.getElementById('neg-tbody').innerHTML=negLines.map(r=>`<tr class="neg-highlight">
     <td>${r.co}</td><td>${r.type}</td>
@@ -1040,8 +1036,6 @@ function renderAttention(){
     <td class="num">${r.hrs.toFixed(1)}</td>
   </tr>`).join('');
 }
-renderAttention();
-
 function renderNoLabor(){
   // Clients where total billable + no-charge hours = 0 AND total hrs = 0
   const noLaborClients=clients.filter(c=>c.hrs===0&&c.rev>0);
@@ -1146,7 +1140,6 @@ function switchTab(id){
   });
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('tab-'+id).classList.add('active');
-  if(id==='service') renderServiceTable();
   if(id==='overview') setTimeout(renderOverviewCharts, 50);
   if(id==='trending') {
     renderTrending();
