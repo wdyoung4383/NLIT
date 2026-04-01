@@ -1237,22 +1237,23 @@ function renderTrending() {
     borderDash: dash || []
   });
 
-  makeChart('trend-gp', MONTH_LABELS_SHORT, [
-    ds('Total GP', data.map(d=>d.total_gp), '#c084fc'),
-    ds('L&S GP', data.map(d=>d.ls_gp), '#fb923c', [4,3]),
-    ds('Service GP', data.map(d=>d.svc_gp), '#60a5fa', [4,3]),
-  ], v => fmt(v));
+  // Determine which agreement type sub-lines have any data across all months
+  const hasLS  = data.some(d=>d.ls_gp  !== 0 || d.ls_rev  !== 0);
+  const hasSvc = data.some(d=>d.svc_gp !== 0 || d.svc_rev !== 0);
 
-  makeChart('trend-margin', MONTH_LABELS_SHORT, [
-    ds('Blended Margin', data.map(d=>d.total_margin), '#c084fc'),
-    ds('Service Margin', data.map(d=>d.svc_margin), '#60a5fa', [4,3]),
-  ], v => v.toFixed(1)+'%');
+  const gpDatasets = [ds('Total GP', data.map(d=>d.total_gp), '#c084fc')];
+  if(hasLS)  gpDatasets.push(ds('L&S GP',     data.map(d=>d.ls_gp),  '#fb923c', [4,3]));
+  if(hasSvc) gpDatasets.push(ds('Service GP', data.map(d=>d.svc_gp), '#60a5fa', [4,3]));
+  makeChart('trend-gp', MONTH_LABELS_SHORT, gpDatasets, v => fmt(v));
 
-  makeChart('trend-rev', MONTH_LABELS_SHORT, [
-    ds('Total Rev', data.map(d=>d.total_rev), '#4ade80'),
-    ds('L&S Rev', data.map(d=>d.ls_rev), '#fb923c', [4,3]),
-    ds('Service Rev', data.map(d=>d.svc_rev), '#60a5fa', [4,3]),
-  ], v => fmt(v));
+  const marginDatasets = [ds('Blended Margin', data.map(d=>d.total_margin), '#c084fc')];
+  if(hasSvc) marginDatasets.push(ds('Service Margin', data.map(d=>d.svc_margin), '#60a5fa', [4,3]));
+  makeChart('trend-margin', MONTH_LABELS_SHORT, marginDatasets, v => v.toFixed(1)+'%');
+
+  const revDatasets = [ds('Total Rev', data.map(d=>d.total_rev), '#4ade80')];
+  if(hasLS)  revDatasets.push(ds('L&S Rev',     data.map(d=>d.ls_rev),  '#fb923c', [4,3]));
+  if(hasSvc) revDatasets.push(ds('Service Rev', data.map(d=>d.svc_rev), '#60a5fa', [4,3]));
+  makeChart('trend-rev', MONTH_LABELS_SHORT, revDatasets, v => fmt(v));
 
   makeChart('trend-tc', MONTH_LABELS_SHORT, [
     ds('Labor Cost', data.map(d=>d.svc_tc), '#f87171'),
@@ -1275,9 +1276,9 @@ function renderTrending() {
       <tbody>
         ${[
           ['Total GP', data.map(d=>fmt(d.total_gp)), data.map(d=>d.total_gp)],
-          ['L&S GP', data.map(d=>fmt(d.ls_gp)), data.map(d=>d.ls_gp)],
-          ['Service GP', data.map(d=>fmt(d.svc_gp)), data.map(d=>d.svc_gp)],
-          ['Service Margin', data.map(d=>d.svc_margin.toFixed(1)+'%'), data.map(d=>d.svc_margin)],
+          ...(hasLS  ? [['L&S GP',        data.map(d=>fmt(d.ls_gp)),              data.map(d=>d.ls_gp)]] : []),
+          ...(hasSvc ? [['Service GP',    data.map(d=>fmt(d.svc_gp)),             data.map(d=>d.svc_gp)]] : []),
+          ...(hasSvc ? [['Service Margin',data.map(d=>d.svc_margin.toFixed(1)+'%'),data.map(d=>d.svc_margin)]] : []),
           ['Labor Cost', data.map(d=>fmt(d.svc_tc)), data.map(d=>d.svc_tc)],
           ['Billable Hrs', data.map(d=>d.svc_hrs.toFixed(1)), data.map(d=>d.svc_hrs)],
         ].map(([label, vals, nums]) => {
