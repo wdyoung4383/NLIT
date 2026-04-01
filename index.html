@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NLIT — Agreement Gross Profit Report | March 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #3e0074;
+    --purple-light: #5a0099;
+    --purple-mid: #7c3aed;
+    --accent: #c084fc;
+    --accent-dim: #a855f7;
+    --bg: #070511;
+    --bg-card: #0f0b1e;
+    --bg-card2: #160f28;
+    --bg-card3: #0b0818;
+    --border: rgba(192,132,252,0.13);
+    --border-strong: rgba(192,132,252,0.30);
+    --text: #ede9ff;
+    --text-muted: #9d8fc0;
+    --text-dim: #564e70;
+    --green: #34d399;
+    --green-bright: #4ade80;
+    --green-bg: rgba(52,211,153,0.1);
+    --red: #f87171;
+    --red-bg: rgba(248,113,113,0.08);
+    --amber: #fbbf24;
+    --ms-color: #60a5fa;
+    --rs-color: #34d399;
+    --ls-color: #fb923c;
+    --bdr-color: #a78bfa;
+    --other-color: #f472b6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* ── HEADER ──────────────────────────────────────────── */
+  .header {
+    background: linear-gradient(135deg, #1c0040 0%, #100022 55%, #070511 100%);
+    border-bottom: 1px solid rgba(192,132,252,0.20);
+    padding: 0 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky; top: 0; z-index: 100;
+    height: 66px;
+    box-shadow: 0 2px 40px rgba(0,0,0,0.6);
+  }
+  .header-left { display: flex; align-items: center; gap: 14px; }
+  .logo-wrap {
+    width: 38px; height: 38px; border-radius: 9px; flex-shrink: 0;
+    border: 1px solid rgba(192,132,252,0.22);
+    overflow: hidden; background: rgba(192,132,252,0.06);
+  }
+  .logo-img { width: 38px; height: 38px; object-fit: cover; display: block; }
+  .header-divider { width: 1px; height: 28px; background: rgba(192,132,252,0.15); }
+  .header-text { display: flex; flex-direction: column; gap: 2px; }
+  .header-title {
+    font-family: 'Orbitron', monospace; font-size: 11px; font-weight: 700;
+    color: var(--accent); letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  .header-sub { font-size: 11px; color: var(--text-dim); letter-spacing: 0.02em; }
+  .header-right { display: flex; align-items: center; gap: 18px; }
+  .header-client-block { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+  .client-name {
+    font-family: 'Orbitron', monospace; font-size: 14px; font-weight: 600;
+    color: var(--text); letter-spacing: 0.08em;
+  }
+  .report-type-label { font-size: 10px; color: var(--text-dim); letter-spacing: 0.06em; text-transform: uppercase; }
+  .header-sep { width: 1px; height: 32px; background: rgba(192,132,252,0.14); }
+  #month-select {
+    background: rgba(192,132,252,0.10);
+    border: 1px solid rgba(192,132,252,0.28);
+    border-radius: 8px;
+    padding: 7px 14px;
+    font-size: 12px;
+    color: var(--accent);
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  #month-select:hover {
+    background: rgba(192,132,252,0.16);
+    border-color: rgba(192,132,252,0.45);
+  }
+
+  /* ── CONTAINER ─────────────────────────────────────── */
+  .container { max-width: 1320px; margin: 0 auto; padding: 28px 36px 56px; }
+
+  /* ── METRICS ───────────────────────────────────────── */
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+  .metric-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 22px 18px;
+    position: relative; overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .metric-card:hover {
+    border-color: rgba(192,132,252,0.28);
+    box-shadow: 0 0 28px rgba(192,132,252,0.12);
+  }
+  .metric-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--purple-mid), var(--accent), var(--purple-mid));
+  }
+  .metric-card::after {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at top left, rgba(192,132,252,0.05) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .metric-icon { font-size: 16px; margin-bottom: 10px; display: block; opacity: 0.6; }
+  .metric-label {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text-dim); margin-bottom: 6px;
+  }
+  .metric-value {
+    font-family: 'Orbitron', monospace; font-size: 24px; font-weight: 500;
+    color: var(--text); line-height: 1.1;
+  }
+  .metric-value.green { color: var(--green); }
+  .metric-sub { font-size: 11px; color: var(--text-muted); margin-top: 7px; }
+
+  /* ── TABS ──────────────────────────────────────────── */
+  .tabs {
+    display: flex; gap: 5px; margin-bottom: 0;
+    border-bottom: 1px solid var(--border);
+    padding: 0 1px;
+  }
+  .tab {
+    padding: 11px 18px; font-size: 11px; font-weight: 600; letter-spacing: 0.07em;
+    text-transform: uppercase; cursor: pointer; color: var(--text-dim);
+    border: 1px solid transparent; border-bottom: none;
+    border-radius: 8px 8px 0 0; transition: all 0.18s;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+  }
+  .tab:hover:not(.active) {
+    color: var(--accent);
+    background: rgba(192,132,252,0.07);
+    border-color: rgba(192,132,252,0.10);
+  }
+  .tab.active {
+    background: var(--bg-card);
+    border-color: var(--border-strong);
+    border-bottom-color: var(--bg-card);
+    color: var(--accent);
+    margin-bottom: -1px;
+  }
+  .tab.active::after {
+    content: ''; position: absolute; bottom: 0; left: 14px; right: 14px; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0.5;
+  }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── TABLE WRAP ────────────────────────────────────── */
+  .table-wrap {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 14px 14px;
+    overflow: hidden;
+  }
+  .filter-row {
+    display: flex; gap: 14px; align-items: center; flex-wrap: wrap;
+    padding: 12px 20px; border-bottom: 1px solid var(--border);
+    background: var(--bg-card2);
+  }
+  .filter-row label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.10em;
+    text-transform: uppercase; color: var(--text-dim);
+  }
+  .filter-row select {
+    font-size: 12px; padding: 5px 10px;
+    background: var(--bg-card3); color: var(--text);
+    border: 1px solid var(--border-strong); border-radius: 7px;
+    font-family: 'Inter', sans-serif; cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .filter-row select:hover { border-color: var(--accent); }
+
+  /* ── TABLE ─────────────────────────────────────────── */
+  table { width: 100%; border-collapse: collapse; }
+  thead th {
+    text-align: left; padding: 11px 16px;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-dim); border-bottom: 1px solid var(--border);
+    background: var(--bg-card2); white-space: nowrap;
+  }
+  thead th.num { text-align: right; }
+  tbody tr.client-row { cursor: pointer; transition: background 0.12s; }
+  tbody tr.client-row:hover td { background: rgba(192,132,252,0.06); }
+  tbody tr.client-row:nth-child(even) td { background: rgba(255,255,255,0.015); }
+  tbody tr.client-row:nth-child(even):hover td { background: rgba(192,132,252,0.06); }
+  tbody td {
+    padding: 10px 16px; border-bottom: 1px solid rgba(192,132,252,0.07);
+    font-size: 13px; color: var(--text); vertical-align: middle;
+  }
+  tbody td.num {
+    text-align: right; font-variant-numeric: tabular-nums; font-size: 13px;
+  }
+  .chevron {
+    font-size: 8px; color: var(--text-dim); display: inline-block;
+    transition: transform 0.18s; width: 14px; flex-shrink: 0;
+  }
+  .chevron.open { transform: rotate(90deg); color: var(--accent); }
+  td.name-cell { display: flex; align-items: center; gap: 8px; }
+
+  /* ── DETAIL ROWS ───────────────────────────────────── */
+  tr.detail-row { display: none; }
+  tr.detail-row.open { display: table-row; }
+  tr.detail-row td {
+    background: rgba(30,8,60,0.35);
+    padding: 8px 16px 8px 40px;
+    font-size: 12px; color: var(--text-muted);
+    border-bottom: 1px solid rgba(192,132,252,0.05);
+  }
+  tr.detail-row td.num { font-size: 12px; text-align: right; }
+  .type-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    display: inline-block; flex-shrink: 0; margin-right: 7px;
+  }
+
+  /* ── ATTENTION HIGHLIGHT ───────────────────────────── */
+  tr.neg-highlight td { background: rgba(248,113,113,0.04); }
+  tr.neg-highlight:hover td { background: rgba(248,113,113,0.08) !important; }
+
+  /* ── VALUE COLORS ──────────────────────────────────── */
+  .pos { color: var(--green); }
+  .neg { color: var(--red); }
+  .warn { color: var(--amber); }
+
+  /* ── BADGES ────────────────────────────────────────── */
+  .badge { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 9px; border-radius: 20px; }
+  .badge-neg { background: var(--red-bg); color: var(--red); border: 1px solid rgba(248,113,113,0.2); }
+  .badge-pos { background: var(--green-bg); color: var(--green-bright); border: 1px solid rgba(74,222,128,0.2); }
+  .badge-warn { background: rgba(251,191,36,0.1); color: var(--amber); border: 1px solid rgba(251,191,36,0.2); }
+
+  /* ── SECTION TITLE ─────────────────────────────────── */
+  .section-title {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-dim);
+    margin-bottom: 14px; margin-top: 24px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-title::before {
+    content: ''; display: block; width: 3px; height: 12px;
+    background: linear-gradient(180deg, var(--accent), var(--purple-mid));
+    border-radius: 2px; flex-shrink: 0;
+  }
+  .section-title:first-child { margin-top: 0; }
+
+  /* ── CHARTS ────────────────────────────────────────── */
+  .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 0; }
+  .chart-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 22px 18px;
+    position: relative;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .chart-card:hover {
+    border-color: rgba(192,132,252,0.26);
+    box-shadow: 0 4px 28px rgba(0,0,0,0.3);
+  }
+  .chart-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(192,132,252,0.35), transparent);
+    border-radius: 14px 14px 0 0;
+  }
+  .chart-card h3 {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim);
+    margin-bottom: 18px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .chart-card h3::before {
+    content: ''; display: block; width: 3px; height: 10px;
+    background: linear-gradient(180deg, var(--accent), var(--purple-mid));
+    border-radius: 2px; flex-shrink: 0;
+  }
+  .chart-wrap { position: relative; width: 100%; }
+
+  /* ── LEGEND ────────────────────────────────────────── */
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 16px;
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .legend-item { display: flex; align-items: center; gap: 7px; font-size: 11px; color: var(--text-muted); }
+  .leg-sq { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+
+  /* ── CALLOUT ───────────────────────────────────────── */
+  .callout {
+    border-radius: 10px; padding: 14px 18px; margin-bottom: 20px;
+    border-left: 3px solid var(--red);
+    background: linear-gradient(135deg, rgba(248,113,113,0.07) 0%, rgba(248,113,113,0.02) 100%);
+    font-size: 13px; color: var(--text-muted);
+    display: flex; align-items: flex-start; gap: 10px;
+  }
+  .callout::before { content: '⚠'; font-size: 14px; color: var(--red); flex-shrink: 0; margin-top: 1px; }
+  .callout strong { color: var(--red); }
+
+  /* ── FOOTER ────────────────────────────────────────── */
+  .footer {
+    text-align: center; font-size: 11px; color: var(--text-dim);
+    padding: 22px 36px;
+    border-top: 1px solid var(--border);
+    letter-spacing: 0.06em;
+    background: linear-gradient(180deg, transparent, rgba(192,132,252,0.025));
+  }
+  .footer span { color: var(--accent-dim); }
+
+  /* ── SCROLLBAR ─────────────────────────────────────── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: rgba(192,132,252,0.22); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(192,132,252,0.42); }
+
+  /* ── DELTA COLUMN ─────────────────────────────────────────── */
+  .delta-up   { color: var(--green-bright); font-weight: 600; }
+  .delta-dn   { color: var(--red); font-weight: 600; }
+  .delta-flat { color: var(--text-dim); }
+
+  /* ── TIER BADGES ──────────────────────────────────────────── */
+  .tier-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 10px; font-weight: 700; padding: 3px 10px;
+    border-radius: 20px; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .tier-platinum { background: rgba(192,132,252,0.18); color: #c084fc; border: 1px solid rgba(192,132,252,0.3); }
+  .tier-gold     { background: rgba(251,191,36,0.12);  color: #fbbf24; border: 1px solid rgba(251,191,36,0.25); }
+  .tier-silver   { background: rgba(148,163,184,0.12); color: #94a3b8; border: 1px solid rgba(148,163,184,0.2); }
+  .tier-atrisk   { background: rgba(248,113,113,0.12); color: #f87171; border: 1px solid rgba(248,113,113,0.2); }
+
+  /* ── CLIENT HEALTH CARDS ──────────────────────────────────── */
+  .health-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px; padding: 22px;
+  }
+  .health-card {
+    background: var(--bg-card2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .health-card:hover {
+    border-color: rgba(192,132,252,0.28);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .health-card-header {
+    display: flex; align-items: flex-start;
+    justify-content: space-between; margin-bottom: 10px; gap: 8px;
+  }
+  .health-card-name {
+    font-size: 13px; font-weight: 600; color: var(--text);
+    line-height: 1.3; flex: 1;
+  }
+  .health-card-gp {
+    font-family: 'Orbitron', monospace; font-size: 14px; font-weight: 500;
+    white-space: nowrap;
+  }
+  .health-card-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4px 12px;
+    margin-bottom: 10px;
+  }
+  .health-stat-label { font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; }
+  .health-stat-value { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+  .health-flags {
+    display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px;
+    padding-top: 8px; border-top: 1px solid var(--border);
+  }
+  .flag-chip {
+    font-size: 10px; font-weight: 600; padding: 2px 8px;
+    border-radius: 20px; letter-spacing: 0.04em;
+  }
+  .flag-priceless  { background: rgba(248,113,113,0.12); color: #f87171; border: 1px solid rgba(248,113,113,0.2); }
+  .flag-costless   { background: rgba(251,191,36,0.10);  color: #fbbf24; border: 1px solid rgba(251,191,36,0.2); }
+  .flag-neg-margin { background: rgba(239,68,68,0.15);   color: #fca5a5; border: 1px solid rgba(239,68,68,0.25); }
+  .flag-attention  { background: rgba(251,146,60,0.12);  color: #fb923c; border: 1px solid rgba(251,146,60,0.2); }
+  .flag-neg-gp     { background: rgba(248,113,113,0.12); color: #f87171; border: 1px solid rgba(248,113,113,0.2); }
+
+  /* ── ADDITIONS AUDIT ──────────────────────────────────────── */
+  .audit-summary-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+    padding: 20px 22px 0;
+  }
+  .audit-kpi {
+    background: var(--bg-card2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px 16px;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .audit-kpi-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); }
+  .audit-kpi-value { font-family: 'Orbitron', monospace; font-size: 20px; font-weight: 500; }
+  .audit-kpi-sub   { font-size: 11px; color: var(--text-muted); }
+  .audit-kpi.kpi-priceless .audit-kpi-value { color: #f87171; }
+  .audit-kpi.kpi-costless  .audit-kpi-value { color: #fbbf24; }
+  .audit-kpi.kpi-negmargin .audit-kpi-value { color: #fb923c; }
+  .audit-kpi.kpi-attn      .audit-kpi-value { color: #c084fc; }
+  .audit-row-priceless td:first-child  { border-left: 3px solid #f87171; }
+  .audit-row-costless  td:first-child  { border-left: 3px solid #fbbf24; }
+  .audit-row-neg_margin td:first-child { border-left: 3px solid #fb923c; }
+  .audit-row-attention td:first-child  { border-left: 3px solid #c084fc; }
+  .audit-row-clean td:first-child      { border-left: 3px solid rgba(74,222,128,0.4); }
+  .audit-flag-pill {
+    display: inline-block; font-size: 9px; font-weight: 700;
+    padding: 2px 7px; border-radius: 20px; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .pill-priceless  { background: rgba(248,113,113,0.15); color: #f87171; }
+  .pill-costless   { background: rgba(251,191,36,0.12);  color: #fbbf24; }
+  .pill-neg_margin { background: rgba(251,146,60,0.12);  color: #fb923c; }
+  .pill-attention  { background: rgba(192,132,252,0.12); color: #c084fc; }
+  .pill-clean      { background: rgba(74,222,128,0.10);  color: #4ade80; }
+  .audit-notes { font-size: 11px; color: var(--text-dim); font-style: italic; max-width: 240px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tab.tab-alert { position: relative; }
+  .tab.tab-alert::before {
+    content: ''; position: absolute; top: 6px; right: 6px;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #f87171;
+  }
+  .health-tier-section { padding: 0 22px 22px; }
+  .health-tier-section .section-title { margin-top: 0; }
+  .tier-summary-row { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 18px; }
+  .tier-summary-card {
+    flex: 1; min-width: 120px;
+    background: var(--bg-card2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 12px 16px;
+    display: flex; flex-direction: column; gap: 3px;
+  }
+  .tier-summary-card .ts-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); }
+  .tier-summary-card .ts-count { font-family: 'Orbitron', monospace; font-size: 18px; font-weight: 500; }
+  .tier-summary-card .ts-gp { font-size: 11px; color: var(--text-muted); }
+  .health-filter-row { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; padding: 14px 22px; border-bottom: 1px solid var(--border); background: var(--bg-card2); }
+  .health-filter-row label { font-size: 10px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; color: var(--text-dim); }
+  .health-filter-row select { font-size: 12px; padding: 5px 10px; background: var(--bg-card3); color: var(--text); border: 1px solid var(--border-strong); border-radius: 7px; font-family: 'Inter', sans-serif; cursor: pointer; }
+
+</style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div id="pw-overlay" style="
+  position:fixed;inset:0;z-index:9999;
+  background:linear-gradient(135deg,#0d0020 0%,#070511 60%,#0a0318 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Inter',sans-serif;
+">
+  <div style="
+    background:#0f0b1e;
+    border:1px solid rgba(192,132,252,0.28);
+    border-radius:18px;
+    padding:44px 48px 40px;
+    max-width:380px;width:90%;
+    box-shadow:0 0 80px rgba(124,58,237,0.18),0 0 0 1px rgba(192,132,252,0.08);
+    text-align:center;
+    position:relative;overflow:hidden;
+  ">
+    <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#7c3aed,#c084fc,#7c3aed)"></div>
+    <div style="font-size:28px;margin-bottom:14px">🔒</div>
+    <div style="font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#c084fc;margin-bottom:6px">Will &amp; Way Solutions</div>
+    <div style="font-size:13px;color:#9d8fc0;margin-bottom:28px;letter-spacing:0.02em">This report is confidential.<br>Enter your access password to continue.</div>
+    <input id="pw-input" type="password" placeholder="Password" autocomplete="off" style="
+      width:100%;padding:11px 16px;
+      background:rgba(192,132,252,0.07);
+      border:1px solid rgba(192,132,252,0.28);
+      border-radius:9px;
+      color:#ede9ff;font-size:14px;
+      font-family:'Inter',sans-serif;
+      outline:none;text-align:center;
+      letter-spacing:0.08em;
+      transition:border-color 0.15s;
+      margin-bottom:14px;
+    ">
+    <div id="pw-error" style="color:#f87171;font-size:12px;margin-bottom:12px;min-height:16px"></div>
+    <button onclick="checkPassword()" style="
+      width:100%;padding:12px;
+      background:linear-gradient(135deg,#7c3aed,#a855f7);
+      border:none;border-radius:9px;
+      color:#fff;font-size:13px;font-weight:600;
+      font-family:'Inter',sans-serif;
+      letter-spacing:0.06em;cursor:pointer;
+      transition:opacity 0.15s;
+    " onmouseover="this.style.opacity='0.88'" onmouseout="this.style.opacity='1'">Unlock Report</button>
+  </div>
+</div>
+<script>
+  function checkPassword(){
+    const val = document.getElementById('pw-input').value;
+    if(val === 'WillsWay4NLIT'){
+      document.getElementById('pw-overlay').style.display='none';
+      sessionStorage.setItem('wws_auth','1');
+    } else {
+      const err = document.getElementById('pw-error');
+      err.textContent = 'Incorrect password. Please try again.';
+      document.getElementById('pw-input').style.borderColor='rgba(248,113,113,0.5)';
+      setTimeout(()=>{ err.textContent=''; document.getElementById('pw-input').style.borderColor='rgba(192,132,252,0.28)'; },2500);
+    }
+  }
+  document.getElementById('pw-input').addEventListener('keydown', e=>{ if(e.key==='Enter') checkPassword(); });
+  if(sessionStorage.getItem('wws_auth')==='1'){
+    document.getElementById('pw-overlay').style.display='none';
+  }
+</script>
+
+<div class="header">
+  <div class="header-left">
+    <div class="logo-wrap">
+      <img class="logo-img" src="https://i.ibb.co/Xkv9S3Lz/67e203b0-3c7d-4c23-a45f-080ec8c77cf8.png" alt="Will &amp; Way Solutions">
+    </div>
+    <div class="header-divider"></div>
+    <div class="header-text">
+      <div class="header-title">Will &amp; Way Solutions</div>
+      <div class="header-sub">Agreement Gross Profit Analysis &middot; Delivered for NLIT</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="header-client-block">
+      <div class="client-name">NLIT</div>
+      <div class="report-type-label">GP Report</div>
+    </div>
+    <div class="header-sep"></div>
+    <select id="month-select" onchange="switchMonth(this.value)">
+          <option value="jan">January 2026</option>
+          <option value="feb">February 2026</option>
+          <option value="mar" selected>March 2026</option>
+        </select>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="metrics" id="metrics-row"></div>
+
+  <div class="tabs" id="tabs-row">
+    <div class="tab active" onclick="switchTab('overview')">Overview</div>
+    <div class="tab" onclick="switchTab('clients')">By Client</div>
+    <div class="tab" onclick="switchTab('types')">By Type</div>
+    <div class="tab" onclick="switchTab('attention')">Needs Attention</div>
+    <div class="tab" onclick="switchTab('nolabor')">No Labor</div>
+    <div class="tab" onclick="switchTab('trending')">Trending</div>
+    <div class="tab" onclick="switchTab('health')">Client Health</div>
+    <div class="tab tab-alert" onclick="switchTab('additions')">Flagged Additions</div>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div id="tab-overview" class="panel active">
+    <div class="table-wrap" style="border-radius:0 14px 14px 14px; padding:22px;">
+      <div class="legend">
+        <div class="legend-item"><span class="leg-sq" style="background:var(--ms-color)"></span>Recurring Revenue</div>
+      </div>
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3>Gross Profit by Agreement Type</h3>
+          <div class="chart-wrap" style="height:220px"><canvas id="chart-type-gp"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <h3>GP Margin % by Type</h3>
+          <div class="chart-wrap" style="height:220px"><canvas id="chart-type-margin"></canvas></div>
+        </div>
+      </div>
+      <div class="charts-grid" style="margin-top:20px">
+        <div class="chart-card">
+          <h3>Top 10 Clients by Gross Profit</h3>
+          <div class="chart-wrap" style="height:380px"><canvas id="chart-top10"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <h3>Bottom 10 Clients by Gross Profit</h3>
+          <div class="chart-wrap" style="height:380px"><canvas id="chart-bottom10"></canvas></div>
+        </div>
+      </div>
+      <div class="charts-grid" style="margin-top:20px">
+        <div class="chart-card" style="grid-column:1/-1">
+          <h3>Margin Scatter — Revenue vs GP Margin % (bubble = billable hours)</h3>
+          <div class="chart-wrap" style="height:340px"><canvas id="chart-scatter"></canvas></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BY CLIENT -->
+  <div id="tab-clients" class="panel">
+    <div class="table-wrap" style="border-radius:0 14px 14px 14px">
+      <div class="filter-row">
+        <label>Sort by</label>
+        <select id="client-sort" onchange="renderClientTable()">
+          <option value="gp-desc">GP (high &rarr; low)</option>
+          <option value="gp-asc">GP (low &rarr; high)</option>
+          <option value="margin-desc">Margin (high &rarr; low)</option>
+          <option value="name">Name A &rarr; Z</option>
+        </select>
+        <label>Min GP</label>
+        <select id="client-min" onchange="renderClientTable()">
+          <option value="-99999">All clients</option>
+          <option value="0">Positive GP only</option>
+          <option value="500">$500+</option>
+          <option value="1000">$1,000+</option>
+          <option value="5000">$5,000+</option>
+        </select>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th style="width:30%">Client</th>
+            <th class="num">Revenue</th>
+            <th class="num">Labor Cost</th>
+            <th class="num">Gross Profit</th>
+            <th class="num">GP Margin</th>
+            <th class="num">Billable Hrs</th>
+            <th class="num">MoM GP &#916;</th>
+          </tr>
+        </thead>
+        <tbody id="client-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- BY TYPE -->
+  <div id="tab-types" class="panel">
+    <div class="table-wrap" style="border-radius:0 14px 14px 14px; padding:22px;">
+      <div class="section-title">By Agreement Type</div>
+      <table>
+        <thead>
+          <tr>
+            <th style="width:32%">Agreement Type</th>
+            <th class="num">Revenue</th>
+            <th class="num">Labor Cost</th>
+            <th class="num">Gross Profit</th>
+            <th class="num">GP Margin</th>
+            <th class="num">Billable Hrs</th>
+            <th class="num">Clients</th>
+          </tr>
+        </thead>
+        <tbody id="type-tbody"></tbody>
+      </table>
+      <div class="section-title" style="margin-top:28px">Service Agreement Blended (L&amp;S vs Managed/Support/BDR)</div>
+      <table>
+        <thead>
+          <tr>
+            <th style="width:32%">Bucket</th>
+            <th class="num">Revenue</th>
+            <th class="num">Labor Cost</th>
+            <th class="num">Gross Profit</th>
+            <th class="num">GP Margin</th>
+            <th class="num">Billable Hrs</th>
+            <th class="num">Clients</th>
+          </tr>
+        </thead>
+        <tbody id="type-blended-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- NEEDS ATTENTION -->
+  <div id="tab-attention" class="panel">
+    <div class="table-wrap" style="border-radius:0 14px 14px 14px; padding:22px;">
+      <div class="section-title">Negative GP Agreements</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Client</th><th>Type</th>
+            <th class="num">GP</th><th class="num">Revenue</th>
+            <th class="num">Labor Cost</th><th class="num">Product Cost</th>
+          </tr>
+        </thead>
+        <tbody id="neg-tbody"></tbody>
+      </table>
+      <div class="section-title">Runaway Remote Support (time cost &gt; revenue)</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Client</th>
+            <th class="num">Revenue</th><th class="num">Labor Cost</th>
+            <th class="num">GP</th><th class="num">Hours</th>
+          </tr>
+        </thead>
+        <tbody id="rs-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- NO LABOR -->
+  <div id="tab-nolabor" class="panel">
+    <div class="table-wrap" style="border-radius:0 14px 14px 14px; padding:22px;">
+      <div class="callout">
+        <strong>Note:</strong> These clients had no billable or no-charge labor hours logged against any agreement in February 2026. They may be underserved, or their agreements may be product/license-only.
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Client</th>
+            <th class="num">Revenue</th>
+            <th class="num">Gross Profit</th>
+            <th class="num">GP Margin</th>
+            <th class="num">Agreement Types</th>
+          </tr>
+        </thead>
+        <tbody id="nolabor-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TRENDING -->
+  <div id="tab-trending" class="panel">
+    <div class="table-wrap" style="border-radius:0 14px 14px 14px; padding:22px;">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;flex-wrap:wrap;">
+        <label style="font-size:10px;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:var(--text-dim)">Company</label>
+        <select id="trend-company" onchange="renderTrending()" style="background:var(--bg-card3);color:var(--text);border:1px solid var(--border-strong);border-radius:8px;padding:7px 12px;font-size:13px;font-family:'Inter',sans-serif;min-width:260px;cursor:pointer;">
+        </select>
+        <label style="font-size:10px;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:var(--text-dim);margin-left:8px">Metrics</label>
+        <div id="trend-toggles" style="display:flex;gap:8px;flex-wrap:wrap;"></div>
+      </div>
+      <div class="charts-grid" style="margin-bottom:20px;">
+        <div class="chart-card">
+          <h3>Gross Profit ($)</h3>
+          <div class="chart-wrap" style="height:200px"><canvas id="trend-gp"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <h3>GP Margin (%)</h3>
+          <div class="chart-wrap" style="height:200px"><canvas id="trend-margin"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <h3>Revenue ($)</h3>
+          <div class="chart-wrap" style="height:200px"><canvas id="trend-rev"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <h3>Labor Cost ($)</h3>
+          <div class="chart-wrap" style="height:200px"><canvas id="trend-tc"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <h3>Billable Hours</h3>
+          <div class="chart-wrap" style="height:200px"><canvas id="trend-hrs"></canvas></div>
+        </div>
+        <div class="chart-card" id="trend-detail-card">
+          <h3>Detail by Type</h3>
+          <div id="trend-detail-table"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLIENT HEALTH -->
+  <div id="tab-health" class="panel">
+    <div class="table-wrap" style="border-radius:0 14px 14px 14px; overflow:visible; border:none; background:transparent;">
+      <div class="health-filter-row">
+        <label>Tier Filter</label>
+        <select id="health-tier-filter" onchange="renderHealthTab()">
+          <option value="all">All Tiers</option>
+          <option value="platinum">Platinum (GP &gt; $3k)</option>
+          <option value="gold">Gold ($1k–$3k)</option>
+          <option value="silver">Silver ($0–$1k)</option>
+          <option value="atrisk">At Risk (negative GP)</option>
+        </select>
+        <label>Sort</label>
+        <select id="health-sort" onchange="renderHealthTab()">
+          <option value="gp-desc">GP High → Low</option>
+          <option value="flags-desc">Most Flags First</option>
+          <option value="name">Name A → Z</option>
+        </select>
+      </div>
+      <div id="health-tier-summary" class="health-tier-section" style="padding-top:20px;"></div>
+      <div id="health-cards-grid" class="health-grid"></div>
+    </div>
+  </div>
+
+  <!-- ADDITIONS AUDIT -->
+  <div id="tab-additions" class="panel">
+    <div class="table-wrap" style="border-radius:0 14px 14px 14px">
+      <div class="audit-summary-grid" id="audit-kpi-row"></div>
+      <div class="filter-row" style="margin-top:14px">
+        <label>Flag</label>
+        <select id="audit-flag" onchange="renderAdditionsTable()">
+          <option value="all">All Flagged</option>
+          <option value="priceless">Priceless (cost, no price)</option>
+          <option value="costless">Costless (price, no cost)</option>
+          <option value="neg_margin">Negative Margin</option>
+          <option value="attention">Needs Attention</option>
+
+        </select>
+        <label>Product Class</label>
+        <select id="audit-type" onchange="renderAdditionsTable()">
+          <option value="all">All Classes</option>
+          <option value="Agreement">Agreement</option>
+          <option value="Non-Inventory">Non-Inventory</option>
+          <option value="Service">Service</option>
+          <option value="Inventory">Inventory</option>
+        </select>
+        <label>Bill</label>
+        <select id="audit-bill" onchange="renderAdditionsTable()">
+          <option value="all">All</option>
+          <option value="true">Billable</option>
+          <option value="false">Non-Billable</option>
+        </select>
+        <label>Company</label>
+        <select id="audit-company" onchange="renderAdditionsTable()">
+          <option value="all">All Companies</option>
+        </select>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th style="width:16%">Company</th>
+            <th style="width:8%">Flag</th>
+            <th style="width:8%">Bill</th>
+            <th style="width:20%">Description</th>
+            <th style="width:11%">Product ID</th>
+            <th class="num">Unit Price</th>
+            <th class="num">Unit Cost</th>
+            <th class="num">Qty</th>
+            <th class="num">Ext Price</th>
+            <th class="num">Margin</th>
+            <th style="width:14%">Notes</th>
+          </tr>
+        </thead>
+        <tbody id="audit-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+<div class="footer">
+  Prepared by <span>Will &amp; Way Solutions</span> &middot; Automate With Purpose &middot; willandway.solutions
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+
+const DATA={"jan":[{"co":"Asymmetry Group","type":"Recurring Revenue","gp":3882.35,"rev":6937.34,"timeCost":1333.4,"prodCost":1721.59,"hrs":29.5},{"co":"Baker Parts, Inc.","type":"Recurring Revenue","gp":1190.2,"rev":1250.0,"timeCost":40.3,"prodCost":19.5,"hrs":0.8},{"co":"BCK Law","type":"Recurring Revenue","gp":692.35,"rev":1019.3,"timeCost":65.5,"prodCost":261.45,"hrs":1.3},{"co":"Conflict Dynamics","type":"Recurring Revenue","gp":692.52,"rev":898.7,"timeCost":8.45,"prodCost":197.73,"hrs":0.2},{"co":"Corentus","type":"Recurring Revenue","gp":442.67,"rev":767.8,"timeCost":0.0,"prodCost":325.13,"hrs":0.0},{"co":"Denterlein Worldwide","type":"Recurring Revenue","gp":3195.71,"rev":5438.1,"timeCost":439.45,"prodCost":1802.94,"hrs":8.7},{"co":"Ecologic","type":"Recurring Revenue","gp":981.69,"rev":1607.21,"timeCost":95.25,"prodCost":530.27,"hrs":1.6},{"co":"Family Estate Planning Law Group","type":"Recurring Revenue","gp":2163.51,"rev":4368.7,"timeCost":660.85,"prodCost":1544.34,"hrs":11.9},{"co":"George J Roberts CPA","type":"Recurring Revenue","gp":421.4,"rev":500.0,"timeCost":0.0,"prodCost":78.6,"hrs":0.0},{"co":"Grafton Group","type":"Recurring Revenue","gp":1435.72,"rev":2051.51,"timeCost":0.0,"prodCost":615.79,"hrs":0.0},{"co":"Hacin Architects, LLC.","type":"Recurring Revenue","gp":4572.57,"rev":9212.28,"timeCost":1359.8,"prodCost":3279.91,"hrs":25.8},{"co":"Herbst Law Group","type":"Recurring Revenue","gp":1021.82,"rev":1280.0,"timeCost":152.1,"prodCost":106.08,"hrs":2.5},{"co":"ISM Group","type":"Recurring Revenue","gp":3309.5,"rev":5096.92,"timeCost":198.25,"prodCost":1589.17,"hrs":3.3},{"co":"KC Real Estate","type":"Recurring Revenue","gp":150.16,"rev":583.25,"timeCost":0.0,"prodCost":433.09,"hrs":0.0},{"co":"Kobe Law","type":"Recurring Revenue","gp":2.4,"rev":15.0,"timeCost":0.0,"prodCost":12.6,"hrs":0.0},{"co":"Lipresti Law, P.C.","type":"Recurring Revenue","gp":575.95,"rev":1017.45,"timeCost":101.3,"prodCost":340.2,"hrs":1.7},{"co":"Lipton Law Group","type":"Recurring Revenue","gp":322.2,"rev":330.0,"timeCost":0.0,"prodCost":7.8,"hrs":0.0},{"co":"Longwood Venues and Destinations","type":"Recurring Revenue","gp":3233.14,"rev":5406.8,"timeCost":1526.3,"prodCost":647.36,"hrs":24.3},{"co":"Mass Restaurant Association","type":"Recurring Revenue","gp":1025.97,"rev":1941.35,"timeCost":312.2,"prodCost":603.18,"hrs":5.8},{"co":"McCormack Builders","type":"Recurring Revenue","gp":696.42,"rev":1210.22,"timeCost":141.05,"prodCost":372.75,"hrs":2.5},{"co":"MIAA MSAA","type":"Recurring Revenue","gp":7385.97,"rev":9717.32,"timeCost":209.3,"prodCost":2122.05,"hrs":4.9},{"co":"Miner Siddall","type":"Recurring Revenue","gp":960.55,"rev":976.25,"timeCost":1.95,"prodCost":13.75,"hrs":2.1},{"co":"naasr","type":"Recurring Revenue","gp":577.95,"rev":1268.72,"timeCost":203.35,"prodCost":487.42,"hrs":3.7},{"co":"Nova Sports USA, Inc.","type":"Recurring Revenue","gp":1958.69,"rev":3168.83,"timeCost":240.0,"prodCost":970.14,"hrs":4.0},{"co":"One 8 Solutions","type":"Recurring Revenue","gp":2008.49,"rev":2277.5,"timeCost":150.05,"prodCost":118.96,"hrs":3.3},{"co":"Pediatric Associates of Brockton","type":"Recurring Revenue","gp":738.95,"rev":750.0,"timeCost":11.05,"prodCost":0.0,"hrs":0.3},{"co":"PJ Spillane Company, Inc.","type":"Recurring Revenue","gp":3488.29,"rev":7484.68,"timeCost":636.25,"prodCost":3360.14,"hrs":14.5},{"co":"PKO","type":"Recurring Revenue","gp":1229.77,"rev":1949.23,"timeCost":108.8,"prodCost":610.66,"hrs":2.1},{"co":"PP Systems","type":"Recurring Revenue","gp":2260.63,"rev":3498.15,"timeCost":248.7,"prodCost":988.82,"hrs":5.8},{"co":"Protectowire Co., Inc","type":"Recurring Revenue","gp":1919.49,"rev":5096.06,"timeCost":1034.4,"prodCost":2142.17,"hrs":19.3},{"co":"Resource Insight, Inc.","type":"Recurring Revenue","gp":532.43,"rev":664.6,"timeCost":0.0,"prodCost":132.17,"hrs":0.0},{"co":"Roark & Mansur Law, PLLC","type":"Recurring Revenue","gp":1470.38,"rev":2283.92,"timeCost":340.6,"prodCost":472.94,"hrs":5.9},{"co":"Schwartz/Silver","type":"Recurring Revenue","gp":4470.73,"rev":7658.29,"timeCost":1099.65,"prodCost":2087.91,"hrs":20.2},{"co":"Sherbrooke Capital","type":"Recurring Revenue","gp":772.52,"rev":860.8,"timeCost":0.0,"prodCost":88.28,"hrs":0.0},{"co":"Sierra Architects","type":"Recurring Revenue","gp":1958.81,"rev":3208.53,"timeCost":341.9,"prodCost":907.82,"hrs":5.6},{"co":"Steven Rotella CPA","type":"Recurring Revenue","gp":793.51,"rev":995.06,"timeCost":32.5,"prodCost":169.05,"hrs":0.5},{"co":"Tappe Architects","type":"Recurring Revenue","gp":4030.79,"rev":5728.75,"timeCost":572.0,"prodCost":1125.96,"hrs":9.0},{"co":"The Doug Flutie, Jr. Foundation","type":"Recurring Revenue","gp":1143.23,"rev":1477.83,"timeCost":186.6,"prodCost":148.0,"hrs":3.6},{"co":"The iaedp Foundation","type":"Recurring Revenue","gp":1355.58,"rev":1690.8,"timeCost":300.95,"prodCost":34.27,"hrs":4.7},{"co":"The Law Office of Gina J. Calabro","type":"Recurring Revenue","gp":16.35,"rev":99.2,"timeCost":3.25,"prodCost":79.6,"hrs":0.0},{"co":"The Savings Bank","type":"Recurring Revenue","gp":3445.0,"rev":3445.0,"timeCost":0.0,"prodCost":0.0,"hrs":0.0},{"co":"Torrey Architecture","type":"Recurring Revenue","gp":790.4,"rev":1103.1,"timeCost":36.3,"prodCost":276.4,"hrs":0.7},{"co":"Toscano Clements Taylor","type":"Recurring Revenue","gp":1500.0,"rev":1500.0,"timeCost":0.0,"prodCost":0.0,"hrs":0.0}],"feb":[{"co":"Asymmetry Group","type":"Recurring Revenue","gp":5948.09,"rev":8212.36,"timeCost":540.3,"prodCost":1723.97,"hrs":10.0},{"co":"Baker Parts, Inc.","type":"Recurring Revenue","gp":1191.67,"rev":1407.2,"timeCost":66.95,"prodCost":148.58,"hrs":2.6},{"co":"BCK Law","type":"Recurring Revenue","gp":757.85,"rev":1019.3,"timeCost":0.0,"prodCost":261.45,"hrs":0.0},{"co":"Conflict Dynamics","type":"Recurring Revenue","gp":700.97,"rev":898.7,"timeCost":0.0,"prodCost":197.73,"hrs":0.0},{"co":"Corentus","type":"Recurring Revenue","gp":442.67,"rev":767.8,"timeCost":0.0,"prodCost":325.13,"hrs":0.0},{"co":"Denterlein Worldwide","type":"Recurring Revenue","gp":2684.31,"rev":5438.1,"timeCost":950.85,"prodCost":1802.94,"hrs":18.4},{"co":"Ecologic","type":"Recurring Revenue","gp":882.44,"rev":1607.21,"timeCost":194.5,"prodCost":530.27,"hrs":3.5},{"co":"Family Estate Planning Law Group","type":"Recurring Revenue","gp":1827.31,"rev":4308.7,"timeCost":985.05,"prodCost":1496.34,"hrs":22.7},{"co":"George J Roberts CPA","type":"Recurring Revenue","gp":421.4,"rev":500.0,"timeCost":0.0,"prodCost":78.6,"hrs":0.0},{"co":"Grafton Group","type":"Recurring Revenue","gp":1205.87,"rev":2051.51,"timeCost":229.85,"prodCost":615.79,"hrs":4.0},{"co":"Hacin Architects, LLC.","type":"Recurring Revenue","gp":4027.02,"rev":9212.28,"timeCost":1905.35,"prodCost":3279.91,"hrs":39.1},{"co":"Herbst Law Group","type":"Recurring Revenue","gp":862.57,"rev":1280.0,"timeCost":311.35,"prodCost":106.08,"hrs":7.9},{"co":"ISM Group","type":"Recurring Revenue","gp":3376.45,"rev":5096.92,"timeCost":131.3,"prodCost":1589.17,"hrs":2.1},{"co":"KC Real Estate","type":"Recurring Revenue","gp":150.16,"rev":583.25,"timeCost":0.0,"prodCost":433.09,"hrs":0.0},{"co":"Kobe Law","type":"Recurring Revenue","gp":2.4,"rev":15.0,"timeCost":0.0,"prodCost":12.6,"hrs":0.0},{"co":"Lipresti Law, P.C.","type":"Recurring Revenue","gp":630.55,"rev":1045.0,"timeCost":60.5,"prodCost":353.95,"hrs":1.7},{"co":"Lipton Law Group","type":"Recurring Revenue","gp":320.25,"rev":330.0,"timeCost":1.95,"prodCost":7.8,"hrs":0.0},{"co":"Longwood Venues and Destinations","type":"Recurring Revenue","gp":3728.25,"rev":5426.0,"timeCost":1034.25,"prodCost":663.5,"hrs":18.5},{"co":"Mass Restaurant Association","type":"Recurring Revenue","gp":893.72,"rev":1941.35,"timeCost":444.45,"prodCost":603.18,"hrs":8.3},{"co":"McCormack Builders","type":"Recurring Revenue","gp":823.37,"rev":1285.22,"timeCost":27.3,"prodCost":434.55,"hrs":2.6},{"co":"MIAA MSAA","type":"Recurring Revenue","gp":7525.47,"rev":9687.32,"timeCost":63.8,"prodCost":2098.05,"hrs":2.8},{"co":"Miner Siddall","type":"Recurring Revenue","gp":962.5,"rev":976.25,"timeCost":0.0,"prodCost":13.75,"hrs":0.0},{"co":"naasr","type":"Recurring Revenue","gp":385.1,"rev":1298.72,"timeCost":402.2,"prodCost":511.42,"hrs":7.5},{"co":"Nova Sports USA, Inc.","type":"Recurring Revenue","gp":2133.26,"rev":3178.43,"timeCost":66.3,"prodCost":978.87,"hrs":1.1},{"co":"One 8 Solutions","type":"Recurring Revenue","gp":1966.14,"rev":2277.5,"timeCost":192.4,"prodCost":118.96,"hrs":3.3},{"co":"Pediatric Associates of Brockton","type":"Recurring Revenue","gp":748.7,"rev":750.0,"timeCost":1.3,"prodCost":0.0,"hrs":0.1},{"co":"PJ Spillane Company, Inc.","type":"Recurring Revenue","gp":3000.59,"rev":7484.68,"timeCost":1123.95,"prodCost":3360.14,"hrs":21.5},{"co":"PKO","type":"Recurring Revenue","gp":1338.57,"rev":1949.23,"timeCost":0.0,"prodCost":610.66,"hrs":0.0},{"co":"PP Systems","type":"Recurring Revenue","gp":1821.33,"rev":3498.15,"timeCost":688.0,"prodCost":988.82,"hrs":11.9},{"co":"Protectowire Co., Inc","type":"Recurring Revenue","gp":2431.39,"rev":5096.06,"timeCost":522.5,"prodCost":2142.17,"hrs":9.4},{"co":"Resource Insight, Inc.","type":"Recurring Revenue","gp":532.43,"rev":664.6,"timeCost":0.0,"prodCost":132.17,"hrs":0.0},{"co":"Roark & Mansur Law, PLLC","type":"Recurring Revenue","gp":1722.33,"rev":2411.72,"timeCost":138.45,"prodCost":550.94,"hrs":2.5},{"co":"Schwartz/Silver","type":"Recurring Revenue","gp":5341.31,"rev":8208.92,"timeCost":801.7,"prodCost":2065.91,"hrs":15.3},{"co":"Sherbrooke Capital","type":"Recurring Revenue","gp":772.52,"rev":860.8,"timeCost":0.0,"prodCost":88.28,"hrs":0.0},{"co":"Sierra Architects","type":"Recurring Revenue","gp":1894.26,"rev":3208.53,"timeCost":406.45,"prodCost":907.82,"hrs":6.8},{"co":"Steven Rotella CPA","type":"Recurring Revenue","gp":793.51,"rev":995.06,"timeCost":32.5,"prodCost":169.05,"hrs":0.5},{"co":"Tappe Architects","type":"Recurring Revenue","gp":3336.7,"rev":5920.75,"timeCost":1299.8,"prodCost":1284.25,"hrs":21.8},{"co":"The Doug Flutie, Jr. Foundation","type":"Recurring Revenue","gp":1178.38,"rev":1477.83,"timeCost":151.45,"prodCost":148.0,"hrs":2.7},{"co":"The iaedp Foundation","type":"Recurring Revenue","gp":1442.8,"rev":1695.6,"timeCost":214.5,"prodCost":38.3,"hrs":3.5},{"co":"The Law Office of Gina J. Calabro","type":"Recurring Revenue","gp":19.6,"rev":99.2,"timeCost":0.0,"prodCost":79.6,"hrs":0.0},{"co":"The Savings Bank","type":"Recurring Revenue","gp":3445.0,"rev":3445.0,"timeCost":0.0,"prodCost":0.0,"hrs":0.0},{"co":"Torrey Architecture","type":"Recurring Revenue","gp":657.3,"rev":1103.1,"timeCost":169.4,"prodCost":276.4,"hrs":3.2},{"co":"Toscano Clements Taylor","type":"Recurring Revenue","gp":1500.0,"rev":1500.0,"timeCost":0.0,"prodCost":0.0,"hrs":0.0}],"mar":[{"co":"Asymmetry Group","type":"Recurring Revenue","gp":4316.36,"rev":8176.36,"timeCost":2168.75,"prodCost":1691.25,"hrs":36.7},{"co":"Baker Parts, Inc.","type":"Recurring Revenue","gp":1235.87,"rev":1407.2,"timeCost":22.75,"prodCost":148.58,"hrs":0.4},{"co":"BCK Law","type":"Recurring Revenue","gp":725.95,"rev":1019.3,"timeCost":31.9,"prodCost":261.45,"hrs":0.7},{"co":"Conflict Dynamics","type":"Recurring Revenue","gp":655.73,"rev":898.7,"timeCost":0.0,"prodCost":242.97,"hrs":0.0},{"co":"Corentus","type":"Recurring Revenue","gp":365.12,"rev":767.8,"timeCost":77.55,"prodCost":325.13,"hrs":0.0},{"co":"Denterlein Worldwide","type":"Recurring Revenue","gp":3091.76,"rev":5438.1,"timeCost":543.4,"prodCost":1802.94,"hrs":10.7},{"co":"Ecologic","type":"Recurring Revenue","gp":521.06,"rev":1633.61,"timeCost":560.1,"prodCost":552.45,"hrs":9.0},{"co":"Family Estate Planning Law Group","type":"Recurring Revenue","gp":2253.01,"rev":4308.7,"timeCost":559.35,"prodCost":1496.34,"hrs":11.1},{"co":"George J Roberts CPA","type":"Recurring Revenue","gp":421.4,"rev":500.0,"timeCost":0.0,"prodCost":78.6,"hrs":0.0},{"co":"Grafton Group","type":"Recurring Revenue","gp":1305.72,"rev":2051.51,"timeCost":130.0,"prodCost":615.79,"hrs":2.0},{"co":"Hacin Architects, LLC.","type":"Recurring Revenue","gp":4795.47,"rev":9212.28,"timeCost":1136.9,"prodCost":3279.91,"hrs":25.6},{"co":"Herbst Law Group","type":"Recurring Revenue","gp":947.82,"rev":1280.0,"timeCost":226.1,"prodCost":106.08,"hrs":4.2},{"co":"ISM Group","type":"Recurring Revenue","gp":3121.65,"rev":5096.92,"timeCost":386.1,"prodCost":1589.17,"hrs":8.2},{"co":"KC Real Estate","type":"Recurring Revenue","gp":150.16,"rev":583.25,"timeCost":0.0,"prodCost":433.09,"hrs":0.0},{"co":"Kobe Law","type":"Recurring Revenue","gp":2.4,"rev":15.0,"timeCost":0.0,"prodCost":12.6,"hrs":0.0},{"co":"Lipresti Law, P.C.","type":"Recurring Revenue","gp":504.6,"rev":1045.0,"timeCost":186.45,"prodCost":353.95,"hrs":3.5},{"co":"Lipton Law Group","type":"Recurring Revenue","gp":322.2,"rev":330.0,"timeCost":0.0,"prodCost":7.8,"hrs":0.0},{"co":"Longwood Venues and Destinations","type":"Recurring Revenue","gp":4058.26,"rev":6549.2,"timeCost":882.45,"prodCost":1608.49,"hrs":15.7},{"co":"Mass Restaurant Association","type":"Recurring Revenue","gp":1047.42,"rev":1937.35,"timeCost":288.75,"prodCost":601.18,"hrs":5.8},{"co":"McCormack Builders","type":"Recurring Revenue","gp":806.47,"rev":1285.22,"timeCost":44.2,"prodCost":434.55,"hrs":0.7},{"co":"MIAA MSAA","type":"Recurring Revenue","gp":7108.57,"rev":9687.32,"timeCost":480.7,"prodCost":2098.05,"hrs":9.2},{"co":"Miner Siddall","type":"Recurring Revenue","gp":957.95,"rev":976.25,"timeCost":4.55,"prodCost":13.75,"hrs":1.1},{"co":"naasr","type":"Recurring Revenue","gp":479.5,"rev":1268.72,"timeCost":301.8,"prodCost":487.42,"hrs":5.6},{"co":"Nova Sports USA, Inc.","type":"Recurring Revenue","gp":2142.36,"rev":3178.43,"timeCost":57.2,"prodCost":978.87,"hrs":1.2},{"co":"Pediatric Associates of Brockton","type":"Recurring Revenue","gp":750.0,"rev":750.0,"timeCost":0.0,"prodCost":0.0,"hrs":0.0},{"co":"PJ Spillane Company, Inc.","type":"Recurring Revenue","gp":3823.14,"rev":7499.68,"timeCost":303.8,"prodCost":3372.74,"hrs":5.0},{"co":"PKO","type":"Recurring Revenue","gp":1275.82,"rev":1949.23,"timeCost":62.75,"prodCost":610.66,"hrs":1.1},{"co":"PP Systems","type":"Recurring Revenue","gp":2227.17,"rev":3426.15,"timeCost":274.95,"prodCost":924.03,"hrs":5.2},{"co":"Protectowire Co., Inc","type":"Recurring Revenue","gp":1869.14,"rev":5096.06,"timeCost":1084.75,"prodCost":2142.17,"hrs":20.5},{"co":"Resource Insight, Inc.","type":"Recurring Revenue","gp":532.43,"rev":664.6,"timeCost":0.0,"prodCost":132.17,"hrs":0.0},{"co":"Roark & Mansur Law, PLLC","type":"Recurring Revenue","gp":1553.58,"rev":2438.12,"timeCost":309.6,"prodCost":574.94,"hrs":5.8},{"co":"Schwartz/Silver","type":"Recurring Revenue","gp":5559.16,"rev":8204.92,"timeCost":581.85,"prodCost":2063.91,"hrs":11.9},{"co":"Sherbrooke Capital","type":"Recurring Revenue","gp":772.52,"rev":860.8,"timeCost":0.0,"prodCost":88.28,"hrs":0.0},{"co":"Sierra Architects","type":"Recurring Revenue","gp":1865.86,"rev":3208.53,"timeCost":434.85,"prodCost":907.82,"hrs":8.3},{"co":"Steven Rotella CPA","type":"Recurring Revenue","gp":826.01,"rev":995.06,"timeCost":0.0,"prodCost":169.05,"hrs":0.0},{"co":"Tappe Architects","type":"Recurring Revenue","gp":3836.1,"rev":5920.75,"timeCost":800.4,"prodCost":1284.25,"hrs":14.8},{"co":"The Doug Flutie, Jr. Foundation","type":"Recurring Revenue","gp":1013.78,"rev":1477.83,"timeCost":316.05,"prodCost":148.0,"hrs":5.5},{"co":"The iaedp Foundation","type":"Recurring Revenue","gp":888.86,"rev":2062.8,"timeCost":827.15,"prodCost":346.79,"hrs":13.7},{"co":"The Law Office of Gina J. Calabro","type":"Recurring Revenue","gp":19.6,"rev":99.2,"timeCost":0.0,"prodCost":79.6,"hrs":0.0},{"co":"The Savings Bank","type":"Recurring Revenue","gp":3445.0,"rev":3445.0,"timeCost":0.0,"prodCost":0.0,"hrs":0.0},{"co":"Torrey Architecture","type":"Recurring Revenue","gp":552.4,"rev":1103.1,"timeCost":274.3,"prodCost":276.4,"hrs":4.8},{"co":"Toscano Clements Taylor","type":"Recurring Revenue","gp":1500.0,"rev":1500.0,"timeCost":0.0,"prodCost":0.0,"hrs":0.0}]};
+const MONTH_LABELS = {jan:'January 2026',feb:'February 2026',mar:'March 2026'};
+
+const CANONICAL_MAP = {"anacapa heating & air inc.": "Anacapa Heating & Air", "edgar rice burroughs, inc.": "Edgar Rice Burroughs", "essex electronics, inc.": "Essex Electronics", "fishman geller & stepanian, llp": "Fishman Geller & Stepanian", "fz tax services": "FZ Tax Services", "gaytan & pineda insurance llc dba/ fiesta insuranc": "Gaytan & Pineda Insurance", "global care medical group": "Global Care Medical Group", "grobstein teeple, llp": "Grobstein Teeple", "harbortown point inc.": "Harbortown Point", "healthbegins": "HealthBegins", "housing corporation of america": "Housing Corp of America", "housing corp of america": "Housing Corp of America", "impact sciences inc. - los angeles": "Impact Sciences", "linger, peterson & shrum": "Linger Peterson & Shrum", "linger peterson & shrum": "Linger Peterson & Shrum", "omni agent solutions": "OMNI Agent Solutions", "ra centers - primero mgmt., inc.": "RA Centers - Primero Mgmt.", "s&j supply co., inc.": "S&J Supply Co.", "s&j supply co.": "S&J Supply Co.", "schifrin, gagnon & dickey": "Schifrin Gagnon & Dickey", "schifrin gagnon & dickey": "Schifrin Gagnon & Dickey", "spondylitis association of america": "Spondylitis Assoc of America", "spondylitis assoc of america": "Spondylitis Assoc of America", "standard aero parts, inc.": "Standard Aero Parts", "the leichter firm, a professional corporation": "The Leichter Firm", "the willow group dba structure home": "The Willow Group", "tur-bo jet products inc.": "Tur-Bo Jet Products", "tur-bo jet products": "Tur-Bo Jet Products", "verdugo hills medical group": "Verdugo Hills Medical", "zankou enterprises, inc.": "Zankou Enterprises", "alliance for wellness": "Alliance for Wellness", "law offices of sauda johnson": "Law Offices of Sauda Johnson", "american vision windows of arizona": "American Vision Windows of Arizona"};
+
+function normCo(s) {
+  const key = s.trim().toLowerCase();
+  if (CANONICAL_MAP[key]) return CANONICAL_MAP[key];
+  let r = s.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
+  r = r.replace(/\bLlp\b/g,'LLP').replace(/\bLlc\b/g,'LLC').replace(/\bDba\b/g,'DBA');
+  r = r.replace(/ Of /g,' of ').replace(/ And /g,' and ').replace(/^And /i,'And ');
+  r = r.replace(/\bFz\b/g,'FZ').replace(/\bOmni\b/g,'OMNI').replace(/\bRa\b/g,'RA');
+  return r;
+}
+// normCoCanon is an alias used in trending/service tabs
+const normCoCanon = normCo;
+
+function prepRows(arr) {
+  return arr.map(r => ({...r, co: normCo(r.co)}));
+}
+
+let raw = prepRows(DATA.mar);
+let currentMonth = 'mar';
+const MONTHS = ['jan','feb','mar'];
+
+function switchMonth(m) {
+  currentMonth = m;
+  document.getElementById('month-select').value = m;
+  raw = prepRows(DATA[m]);
+  Object.keys(expandState).forEach(k => delete expandState[k]);
+  buildAggregates();
+  renderMetrics();
+  renderClientTable();
+  renderTypeTable();
+  renderAttention();
+  renderNoLabor();
+  // re-render overview charts for the new month
+  setTimeout(renderOverviewCharts, 50);
+  document.querySelector('.header-sub').textContent = 'Agreement Gross Profit Analysis · Delivered for GoodSuite · ' + MONTH_LABELS[m];
+}
+
+function typeColor(t){
+  if(t==="Managed Services") return "#60a5fa";
+  if(t==="Remote Support") return "#4ade80";
+  if(t==="License & Subscription") return "#fb923c";
+  if(t==="BDR") return "#a78bfa";
+  return "#f472b6";
+}
+function fmt(n){return(n<0?'-':'')+'$'+Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0})}
+
+// Build aggregates
+let clients=[], types=[];
+function buildAggregates(){
+  const clientMap={};
+  raw.forEach(r=>{
+    if(!clientMap[r.co])clientMap[r.co]={co:r.co,gp:0,rev:0,hrs:0,timeCost:0,lines:[]};
+    clientMap[r.co].gp+=r.gp;
+    clientMap[r.co].rev+=r.rev;
+    clientMap[r.co].hrs+=r.hrs;
+    clientMap[r.co].timeCost+=r.timeCost;
+    if(r.gp!==0||r.rev!==0||r.timeCost!==0||r.prodCost!==0)clientMap[r.co].lines.push(r);
+  });
+  clients=Object.values(clientMap);
+  const typeMap={};
+  raw.forEach(r=>{
+    if(!typeMap[r.type])typeMap[r.type]={type:r.type,gp:0,rev:0,hrs:0,timeCost:0,count:new Set()};
+    typeMap[r.type].gp+=r.gp;
+    typeMap[r.type].rev+=r.rev;
+    typeMap[r.type].hrs+=r.hrs;
+    typeMap[r.type].timeCost+=r.timeCost;
+    typeMap[r.type].count.add(r.co);
+  });
+  types=Object.values(typeMap).map(t=>({...t,count:t.count.size}));
+}
+buildAggregates();
+
+function renderMetrics(){
+const totalGP=clients.reduce((a,c)=>a+c.gp,0);
+const totalRev=clients.reduce((a,c)=>a+c.rev,0);
+const totalHrs=clients.reduce((a,c)=>a+c.hrs,0);
+const activeClients=clients.filter(c=>c.rev>0).length;
+const negClients=clients.filter(c=>c.gp<0).length;
+const sel=document.getElementById('month-select');
+const monthLabel=sel.options[sel.selectedIndex].text;
+document.getElementById('metrics-row').innerHTML=`
+  <div class="metric-card">
+    <span class="metric-icon">💰</span>
+    <div class="metric-label">Total Gross Profit</div>
+    <div class="metric-value green">${fmt(totalGP)}</div>
+    <div class="metric-sub">${monthLabel}</div>
+  </div>
+  <div class="metric-card">
+    <span class="metric-icon">📊</span>
+    <div class="metric-label">Blended GP Margin</div>
+    <div class="metric-value">${totalRev>0?(totalGP/totalRev*100).toFixed(1)+'%':'—'}</div>
+    <div class="metric-sub">on ${fmt(totalRev)} revenue</div>
+  </div>
+  <div class="metric-card">
+    <span class="metric-icon">🏢</span>
+    <div class="metric-label">Active Clients</div>
+    <div class="metric-value">${activeClients}</div>
+    <div class="metric-sub">${negClients > 0 ? negClients+' with negative GP' : 'all profitable'}</div>
+  </div>
+  <div class="metric-card">
+    <span class="metric-icon">⏱</span>
+    <div class="metric-label">Billable Hours</div>
+    <div class="metric-value">${totalHrs.toFixed(1)}</div>
+    <div class="metric-sub">logged this period</div>
+  </div>
+`;
+}renderMetrics();
+const expandState={};
+function getClientGP(month, coName) {
+  return prepRows(DATA[month]).filter(r=>r.co===coName).reduce((a,r)=>a+r.gp,0);
+}
+function renderClientTable(){
+  const sort=document.getElementById('client-sort').value;
+  const minGP=parseFloat(document.getElementById('client-min').value);
+  let data=clients.filter(c=>c.gp>=minGP);
+  if(sort==='gp-desc')data.sort((a,b)=>b.gp-a.gp);
+  else if(sort==='gp-asc')data.sort((a,b)=>a.gp-b.gp);
+  else if(sort==='margin-desc')data.sort((a,b)=>(b.rev>0?b.gp/b.rev:0)-(a.rev>0?a.gp/a.rev:0));
+  else data.sort((a,b)=>a.co.localeCompare(b.co));
+  const mIdx = MONTHS.indexOf(currentMonth);
+  const tbody=document.getElementById('client-tbody');
+  let html='';
+  data.forEach((c,i)=>{
+    const margin=c.rev>0?(c.gp/c.rev*100):0;
+    const gpCls=c.gp<0?'neg':'pos';
+    const mCls=margin<0?'neg':margin<20?'warn':'pos';
+    const isOpen=expandState[c.co];
+    const esc=c.co.replace(/'/g,"\\'");
+    let deltaHtml='<td class="num delta-flat" style="color:var(--text-dim)">—</td>';
+    if(mIdx>0){
+      const prevGP=getClientGP(MONTHS[mIdx-1],c.co);
+      const delta=c.gp-prevGP;
+      const sign=delta>0?'+':'';
+      const cls=delta>0?'delta-up':delta<0?'delta-dn':'delta-flat';
+      const arrow=delta>0?'▲':delta<0?'▼':'—';
+      deltaHtml=`<td class="num ${cls}">${arrow} ${sign}${fmt(delta)}</td>`;
+    }
+    html+=`<tr class="client-row" onclick="toggleRow('${esc}')">
+      <td class="name-cell"><span class="chevron${isOpen?' open':''}">▶</span>${c.co}</td>
+      <td class="num">${fmt(c.rev)}</td>
+      <td class="num ${c.timeCost>0?'warn':''}">${ c.timeCost>0?fmt(c.timeCost):'—'}</td>
+      <td class="num ${gpCls}">${fmt(c.gp)}</td>
+      <td class="num ${mCls}">${c.rev>0?margin.toFixed(1)+'%':'—'}</td>
+      <td class="num">${c.hrs.toFixed(1)}</td>
+      ${deltaHtml}
+    </tr>`;
+    c.lines.forEach(l=>{
+      const lgp=l.gp<0?'neg':'';
+      const lm=l.rev>0?(l.gp/l.rev*100).toFixed(1)+'%':'—';
+      html+=`<tr class="detail-row${isOpen?' open':''}" data-parent="${c.co.replace(/"/g,'&quot;')}">
+        <td><span class="type-dot" style="background:${typeColor(l.type)}"></span>${l.type}</td>
+        <td class="num">${fmt(l.rev)}</td>
+        <td class="num ${l.timeCost>0?'warn':''}">${ l.timeCost>0?fmt(l.timeCost):'—'}</td>
+        <td class="num ${lgp}">${fmt(l.gp)}</td>
+        <td class="num ${lgp}">${lm}</td>
+        <td class="num">${l.hrs.toFixed(1)}</td>
+        <td></td>
+      </tr>`;
+    });
+  });
+  tbody.innerHTML=html;
+}
+function toggleRow(co){
+  expandState[co]=!expandState[co];
+  document.querySelectorAll(`[data-parent="${co.replace(/"/g,'&quot;')}"]`).forEach(r=>r.classList.toggle('open',expandState[co]));
+  document.querySelectorAll('.client-row').forEach(row=>{
+    if(row.querySelector('td')&&row.querySelector('td').textContent.trim().startsWith(co.substring(0,10))){
+      const chev=row.querySelector('.chevron');
+      if(chev)chev.classList.toggle('open',expandState[co]);
+    }
+  });
+}
+renderClientTable();
+
+function renderTypeTable(){
+  const sorted=[...types].sort((a,b)=>b.gp-a.gp);
+  document.getElementById('type-tbody').innerHTML=sorted.map(t=>{
+    const m=t.rev>0?(t.gp/t.rev*100):0;
+    return `<tr>
+      <td><span class="type-dot" style="background:${typeColor(t.type)}"></span>${t.type}</td>
+      <td class="num">${fmt(t.rev)}</td>
+      <td class="num ${t.timeCost>0?'warn':''}">${t.timeCost>0?fmt(t.timeCost):'—'}</td>
+      <td class="num ${t.gp<0?'neg':'pos'}">${fmt(t.gp)}</td>
+      <td class="num">${t.rev>0?m.toFixed(1)+'%':'—'}</td>
+      <td class="num">${t.hrs.toFixed(1)}</td>
+      <td class="num">${t.count}</td>
+    </tr>`;
+  }).join('');
+
+  // Blended: L&S bucket vs Managed/Support/BDR bucket
+  const ls = {gp:0,rev:0,tc:0,hrs:0,cos:new Set()};
+  const svc = {gp:0,rev:0,tc:0,hrs:0,cos:new Set()};
+  raw.forEach(r => {
+    if (r.type === 'License & Subscription') {
+      ls.gp+=r.gp; ls.rev+=r.rev; ls.tc+=r.timeCost; ls.hrs+=r.hrs; ls.cos.add(r.co);
+    } else {
+      svc.gp+=r.gp; svc.rev+=r.rev; svc.tc+=r.timeCost; svc.hrs+=r.hrs; svc.cos.add(r.co);
+    }
+  });
+  const blendedRows = [
+    {label:'Managed / Support / BDR', color:'var(--ms-color)', ...svc, count:svc.cos.size},
+    {label:'License & Subscription',  color:'var(--ls-color)', ...ls,  count:ls.cos.size},
+  ];
+  const totGp = ls.gp+svc.gp, totRev = ls.rev+svc.rev, totTc = ls.tc+svc.tc, totHrs = ls.hrs+svc.hrs;
+  document.getElementById('type-blended-tbody').innerHTML = [
+    ...blendedRows.map(b => {
+      const m = b.rev>0?(b.gp/b.rev*100):0;
+      return `<tr>
+        <td><span class="type-dot" style="background:${b.color}"></span>${b.label}</td>
+        <td class="num">${fmt(b.rev)}</td>
+        <td class="num ${b.tc>0?'warn':''}">${b.tc>0?fmt(b.tc):'—'}</td>
+        <td class="num ${b.gp<0?'neg':'pos'}">${fmt(b.gp)}</td>
+        <td class="num">${b.rev>0?m.toFixed(1)+'%':'—'}</td>
+        <td class="num">${b.hrs.toFixed(1)}</td>
+        <td class="num">${b.count}</td>
+      </tr>`;
+    }),
+    `<tr style="border-top:1px solid rgba(192,132,252,0.25);font-weight:500">
+      <td style="color:var(--text-muted);font-size:12px;letter-spacing:.04em">Total</td>
+      <td class="num">${fmt(totRev)}</td>
+      <td class="num ${totTc>0?'warn':''}">${totTc>0?fmt(totTc):'—'}</td>
+      <td class="num ${totGp<0?'neg':'pos'}">${fmt(totGp)}</td>
+      <td class="num">${totRev>0?(totGp/totRev*100).toFixed(1)+'%':'—'}</td>
+      <td class="num">${totHrs.toFixed(1)}</td>
+      <td class="num"></td>
+    </tr>`,
+  ].join('');
+}
+renderTypeTable();
+
+function renderAttention(){
+  const negLines=raw.filter(r=>r.gp<0&&(r.rev>0||r.timeCost>0||r.prodCost>0)).sort((a,b)=>a.gp-b.gp);
+  document.getElementById('neg-tbody').innerHTML=negLines.map(r=>`<tr class="neg-highlight">
+    <td>${r.co}</td><td>${r.type}</td>
+    <td class="num neg">${fmt(r.gp)}</td>
+    <td class="num">${fmt(r.rev)}</td>
+    <td class="num">${fmt(r.timeCost)}</td>
+    <td class="num">${fmt(r.prodCost)}</td>
+  </tr>`).join('');
+  const badRS=raw.filter(r=>r.type==="Remote Support"&&r.timeCost>r.rev&&r.timeCost>100).sort((a,b)=>a.gp-b.gp);
+  document.getElementById('rs-tbody').innerHTML=badRS.map(r=>`<tr class="neg-highlight">
+    <td>${r.co}</td>
+    <td class="num">${fmt(r.rev)}</td>
+    <td class="num neg">${fmt(r.timeCost)}</td>
+    <td class="num neg">${fmt(r.gp)}</td>
+    <td class="num">${r.hrs.toFixed(1)}</td>
+  </tr>`).join('');
+}
+renderAttention();
+
+function renderNoLabor(){
+  // Clients where total billable + no-charge hours = 0 AND total hrs = 0
+  const noLaborClients=clients.filter(c=>c.hrs===0&&c.rev>0);
+  noLaborClients.sort((a,b)=>b.rev-a.rev);
+  document.getElementById('nolabor-tbody').innerHTML=noLaborClients.map(c=>{
+    const m=c.rev>0?(c.gp/c.rev*100):0;
+    const types=[...new Set(c.lines.map(l=>l.type))].join(', ');
+    return `<tr>
+      <td>${c.co}</td>
+      <td class="num">${fmt(c.rev)}</td>
+      <td class="num ${c.gp<0?'neg':'pos'}">${fmt(c.gp)}</td>
+      <td class="num ${m<0?'neg':m<20?'warn':'pos'}">${m.toFixed(1)}%</td>
+      <td style="font-size:11px;color:var(--text-muted)">${types}</td>
+    </tr>`;
+  }).join('');
+}
+renderNoLabor();
+
+// Charts
+let overviewCharts = {};
+function renderOverviewCharts() {
+  const extTypes = types.filter(t => t.type !== 'Internal/Other');
+  ['chart-type-gp','chart-type-margin','chart-top10','chart-bottom10'].forEach(id => {
+    if (overviewCharts[id]) { overviewCharts[id].destroy(); }
+  });
+  Chart.defaults.color = '#a89bc2';
+  Chart.defaults.borderColor = 'rgba(192,132,252,0.1)';
+  overviewCharts['chart-type-gp'] = new Chart(document.getElementById('chart-type-gp'), {
+    type:'bar',
+    data:{labels:extTypes.map(t=>t.type),datasets:[{data:extTypes.map(t=>Math.round(t.gp)),backgroundColor:extTypes.map(t=>typeColor(t.type)),borderRadius:5,borderSkipped:false}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.raw)}}},scales:{x:{grid:{display:false},ticks:{font:{size:11}}},y:{grid:{color:'rgba(192,132,252,0.08)'},ticks:{callback:v=>fmt(v),font:{size:11}}}}}
+  });
+  overviewCharts['chart-type-margin'] = new Chart(document.getElementById('chart-type-margin'), {
+    type:'bar',
+    data:{labels:extTypes.map(t=>t.type),datasets:[{data:extTypes.map(t=>t.rev>0?parseFloat((t.gp/t.rev*100).toFixed(1)):0),backgroundColor:extTypes.map(t=>typeColor(t.type)),borderRadius:5,borderSkipped:false}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw.toFixed(1)+'%'}}},scales:{x:{grid:{display:false},ticks:{font:{size:11}}},y:{grid:{color:'rgba(192,132,252,0.08)'},ticks:{callback:v=>v+'%',font:{size:11}},min:0,max:100}}}
+  });
+  const sortedClients = [...clients].sort((a,b) => b.gp - a.gp);
+  const top10 = sortedClients.slice(0, 10);
+  overviewCharts['chart-top10'] = new Chart(document.getElementById('chart-top10'), {
+    type:'bar',
+    data:{labels:top10.map(c=>c.co),datasets:[{data:top10.map(c=>Math.round(c.gp)),backgroundColor:'#7c3aed',borderRadius:5,borderSkipped:false}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.raw)}}},scales:{y:{grid:{display:false},ticks:{font:{size:12}}},x:{grid:{color:'rgba(192,132,252,0.08)'},ticks:{callback:v=>fmt(v),font:{size:11}}}}}
+  });
+  const bottom10 = sortedClients.slice(-10).reverse();
+  overviewCharts['chart-bottom10'] = new Chart(document.getElementById('chart-bottom10'), {
+    type:'bar',
+    data:{labels:bottom10.map(c=>c.co),datasets:[{data:bottom10.map(c=>Math.round(c.gp)),backgroundColor:bottom10.map(c=>c.gp<0?'#f87171':'#fb923c'),borderRadius:5,borderSkipped:false}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.raw)}}},scales:{y:{grid:{display:false},ticks:{font:{size:12}}},x:{grid:{color:'rgba(192,132,252,0.08)'},ticks:{callback:v=>fmt(v),font:{size:11}}}}}
+  });
+
+  // ── MARGIN SCATTER CHART ─────────────────────────────────────
+  const totalRev = clients.reduce((a,c)=>a+c.rev,0);
+  const scatterData = clients
+    .filter(c=>c.rev>0)
+    .map(c=>({
+      x: Math.round(c.rev),
+      y: parseFloat((c.gp/c.rev*100).toFixed(1)),
+      r: Math.max(4, Math.min(28, c.hrs * 0.5 + 4)),
+      label: c.co,
+      gp: c.gp,
+      hrs: c.hrs
+    }));
+  const scatterColors = scatterData.map(d => {
+    if(d.y < 0) return 'rgba(248,113,113,0.75)';
+    if(d.y < 20) return 'rgba(251,191,36,0.75)';
+    return 'rgba(74,222,128,0.75)';
+  });
+  if(overviewCharts['chart-scatter']) overviewCharts['chart-scatter'].destroy();
+  overviewCharts['chart-scatter'] = new Chart(document.getElementById('chart-scatter'), {
+    type:'bubble',
+    data:{datasets:[{
+      data: scatterData,
+      backgroundColor: scatterColors,
+      borderColor: scatterColors.map(c=>c.replace('0.75','1')),
+      borderWidth: 1
+    }]},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{callbacks:{
+          label:c=>{
+            const d=c.raw;
+            return [d.label, 'Rev: '+fmt(d.x), 'GP Margin: '+d.y+'%', 'GP: '+fmt(d.gp), 'Hrs: '+d.hrs.toFixed(1)];
+          }
+        }}
+      },
+      scales:{
+        x:{grid:{color:'rgba(192,132,252,0.08)'},ticks:{callback:v=>fmt(v),font:{size:11}},title:{display:true,text:'Revenue',color:'#a89bc2',font:{size:11}}},
+        y:{grid:{color:'rgba(192,132,252,0.08)'},ticks:{callback:v=>v+'%',font:{size:11}},title:{display:true,text:'GP Margin %',color:'#a89bc2',font:{size:11}}}
+      }
+    }
+  });
+}
+setTimeout(renderOverviewCharts, 200);
+
+function switchTab(id){
+  document.querySelectorAll('.tab').forEach((t,i)=>{
+    const ids=['overview','clients','types','attention','nolabor','service','trending','health','additions'];
+    t.classList.toggle('active',ids[i]===id);
+  });
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  if(id==='service') renderServiceTable();
+  if(id==='overview') setTimeout(renderOverviewCharts, 50);
+  if(id==='trending') {
+    renderTrending();
+    setTimeout(renderTrending, 50);
+  }
+  if(id==='health') renderHealthTab();
+  if(id==='additions') renderAdditionsTable();
+}
+
+
+function toggleSvcRow(co, rowEl) {
+  const rows = document.querySelectorAll(`[data-svc-parent="${co.replace(/"/g,'&quot;')}"]`);
+  const chev = rowEl.querySelector('.chevron');
+  const isOpen = chev && chev.classList.contains('open');
+  rows.forEach(r => r.classList.toggle('open', !isOpen));
+  if (chev) chev.classList.toggle('open', !isOpen);
+}
+
+// ============================================================
+// TRENDING TAB
+// ============================================================
+const MONTH_LABELS_SHORT = ['Jan 2026','Feb 2026','Mar 2026'];
+let trendCharts = {};
+
+function getAllCompanies() {
+  const cos = new Set();
+  MONTHS.forEach(m => DATA[m].forEach(r => cos.add(normCoCanon(r.co))));
+  return [...cos].sort();
+}
+
+function populateTrendDropdown() {
+  const sel = document.getElementById('trend-company');
+  getAllCompanies().forEach(co => {
+    const opt = document.createElement('option');
+    opt.value = co; opt.textContent = co;
+    sel.appendChild(opt);
+  });
+}
+populateTrendDropdown();
+
+function getTrendData(co) {
+  return MONTHS.map(m => {
+    const rows = DATA[m].map(r => ({...r, co: normCoCanon(r.co)})).filter(r => r.co === co);
+    const ls = {gp:0, rev:0, tc:0};
+    const svc = {gp:0, rev:0, tc:0, hrs:0};
+    rows.forEach(r => {
+      if (r.type === 'License & Subscription') {
+        ls.gp += r.gp; ls.rev += r.rev; ls.tc += r.timeCost;
+      } else {
+        svc.gp += r.gp; svc.rev += r.rev; svc.tc += r.timeCost; svc.hrs += r.hrs;
+      }
+    });
+    const total_gp = ls.gp + svc.gp;
+    const total_rev = ls.rev + svc.rev;
+    return {
+      ls_gp: ls.gp, ls_rev: ls.rev, ls_tc: ls.tc,
+      svc_gp: svc.gp, svc_rev: svc.rev, svc_tc: svc.tc, svc_hrs: svc.hrs,
+      total_gp, total_rev,
+      total_margin: total_rev > 0 ? total_gp/total_rev*100 : 0,
+      svc_margin: svc.rev > 0 ? svc.gp/svc.rev*100 : 0,
+      rows
+    };
+  });
+}
+
+function makeChart(id, labels, datasets, yFmt) {
+  if (trendCharts[id]) trendCharts[id].destroy();
+  trendCharts[id] = new Chart(document.getElementById(id), {
+    type: 'line',
+    data: { labels, datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: datasets.length > 1, labels: { color:'#a89bc2', boxWidth:10, font:{size:11} } },
+        tooltip: { callbacks: { label: c => yFmt(c.raw) } }
+      },
+      scales: {
+        x: { grid:{display:false}, ticks:{color:'#a89bc2',font:{size:11}} },
+        y: { grid:{color:'rgba(192,132,252,0.08)'}, ticks:{color:'#a89bc2',font:{size:11},callback:v=>yFmt(v)} }
+      }
+    }
+  });
+}
+
+function renderTrending() {
+  const co = document.getElementById('trend-company').value;
+  if (!co) return;
+  const data = getTrendData(co);
+
+  const ds = (label, vals, color, dash) => ({
+    label, data: vals.map(v => Math.round(v * 100)/100),
+    borderColor: color, backgroundColor: color+'33',
+    pointBackgroundColor: color, pointRadius: 5,
+    tension: 0.3, fill: false,
+    borderDash: dash || []
+  });
+
+  makeChart('trend-gp', MONTH_LABELS_SHORT, [
+    ds('Total GP', data.map(d=>d.total_gp), '#c084fc'),
+    ds('L&S GP', data.map(d=>d.ls_gp), '#fb923c', [4,3]),
+    ds('Service GP', data.map(d=>d.svc_gp), '#60a5fa', [4,3]),
+  ], v => fmt(v));
+
+  makeChart('trend-margin', MONTH_LABELS_SHORT, [
+    ds('Blended Margin', data.map(d=>d.total_margin), '#c084fc'),
+    ds('Service Margin', data.map(d=>d.svc_margin), '#60a5fa', [4,3]),
+  ], v => v.toFixed(1)+'%');
+
+  makeChart('trend-rev', MONTH_LABELS_SHORT, [
+    ds('Total Rev', data.map(d=>d.total_rev), '#4ade80'),
+    ds('L&S Rev', data.map(d=>d.ls_rev), '#fb923c', [4,3]),
+    ds('Service Rev', data.map(d=>d.svc_rev), '#60a5fa', [4,3]),
+  ], v => fmt(v));
+
+  makeChart('trend-tc', MONTH_LABELS_SHORT, [
+    ds('Labor Cost', data.map(d=>d.svc_tc), '#f87171'),
+  ], v => fmt(v));
+
+  makeChart('trend-hrs', MONTH_LABELS_SHORT, [
+    ds('Billable Hours', data.map(d=>d.svc_hrs), '#a78bfa'),
+  ], v => v.toFixed(1)+'h');
+
+  // Detail table
+  const detailHtml = `
+    <table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:4px;">
+      <thead>
+        <tr>
+          <th style="text-align:left;padding:5px 8px;color:var(--text-dim);font-size:10px;letter-spacing:.08em;text-transform:uppercase;">Metric</th>
+          ${MONTH_LABELS_SHORT.map(l=>`<th style="text-align:right;padding:5px 8px;color:var(--text-dim);font-size:10px;letter-spacing:.08em;text-transform:uppercase;">${l}</th>`).join('')}
+          <th style="text-align:right;padding:5px 8px;color:var(--text-dim);font-size:10px;letter-spacing:.08em;text-transform:uppercase;">Trend</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${[
+          ['Total GP', data.map(d=>fmt(d.total_gp)), data.map(d=>d.total_gp)],
+          ['L&S GP', data.map(d=>fmt(d.ls_gp)), data.map(d=>d.ls_gp)],
+          ['Service GP', data.map(d=>fmt(d.svc_gp)), data.map(d=>d.svc_gp)],
+          ['Service Margin', data.map(d=>d.svc_margin.toFixed(1)+'%'), data.map(d=>d.svc_margin)],
+          ['Labor Cost', data.map(d=>fmt(d.svc_tc)), data.map(d=>d.svc_tc)],
+          ['Billable Hrs', data.map(d=>d.svc_hrs.toFixed(1)), data.map(d=>d.svc_hrs)],
+        ].map(([label, vals, nums]) => {
+          const delta = nums[nums.length-1] - nums[0];
+          const arrow = delta > 0 ? '↑' : delta < 0 ? '↓' : '—';
+          // For cost and labor, up is bad; for everything else up is good
+          const isCost = label === 'Labor Cost';
+          const arrowCls = delta === 0 ? '' : ((delta > 0) !== isCost) ? 'pos' : 'neg';
+          return `<tr style="border-bottom:1px solid rgba(192,132,252,0.06)">
+            <td style="padding:6px 8px;color:var(--text-muted)">${label}</td>
+            ${vals.map(v=>`<td style="text-align:right;padding:6px 8px;color:var(--text)">${v}</td>`).join('')}
+            <td style="text-align:right;padding:6px 8px" class="${arrowCls}">${arrow} ${Math.abs(nums[nums.length-1]-nums[0]).toFixed(nums[0]%1===0?0:1)}</td>
+          </tr>`;
+        }).join('')}
+      </tbody>
+    </table>`;
+  document.getElementById('trend-detail-table').innerHTML = detailHtml;
+}
+
+// Auto-render trending when tab is switched to
+
+// ============================================================
+// ADDITIONS AUDIT DATA (Active additions only)
+// ============================================================
+const ADDITIONS_DATA=[{"co":"Lipresti Law, P.C.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"Monthly Service Contract - Provisors discount","unit_price":577.35,"unit_cost":0.0,"qty":1.0,"ext_price":577.35,"margin":577.35,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"Lipresti Law, P.C.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management","desc":"MSP systems management & AntiVirus","unit_price":5.51,"unit_cost":2.75,"qty":5.0,"ext_price":27.55,"margin":13.8,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Lipresti Law, P.C.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Dropbox for Business Advanced","desc":"Dropbox Business","unit_price":30.0,"unit_cost":24.0,"qty":9.0,"ext_price":270.0,"margin":54.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Lipresti Law, P.C.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"OneLogin","desc":"Single Sign-On & Access Management","unit_price":11.02,"unit_cost":6.0,"qty":5.0,"ext_price":55.1,"margin":25.1,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Lipresti Law, P.C.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Mimecast","desc":"Mimecast - advanced  email security","unit_price":8.0,"unit_cost":6.0,"qty":5.0,"ext_price":40.0,"margin":10.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Lipresti Law, P.C.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Stand - NCE Month","desc":"365 Business Standard - NCE Monthly","unit_price":15.0,"unit_cost":12.6,"qty":7.0,"ext_price":105.0,"margin":16.8,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Asymmetry Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"Monthly Service Contract","unit_price":181.74,"unit_cost":0.0,"qty":32.0,"ext_price":5815.68,"margin":5815.68,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"Asymmetry Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management - MDR","desc":"MSP systems management","unit_price":5.51,"unit_cost":2.2,"qty":49.0,"ext_price":269.99,"margin":162.19,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Asymmetry Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Basic - NCE","desc":"365 Business Basic","unit_price":7.2,"unit_cost":4.55,"qty":3.0,"ext_price":21.6,"margin":7.95,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Asymmetry Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Project Plan 1 - NCE","desc":"Project Plan 1","unit_price":12.0,"unit_cost":8.4,"qty":1.0,"ext_price":12.0,"margin":3.6,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Asymmetry Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Project Plan 3 NCE","desc":"365 Project Plan 3","unit_price":36.0,"unit_cost":32.72,"qty":2.0,"ext_price":72.0,"margin":6.56,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Asymmetry Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Premium - NCE","desc":"365 Business Premium - NCE Monthly","unit_price":26.4,"unit_cost":24.0,"qty":45.0,"ext_price":1188.0,"margin":108.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Asymmetry Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Exchange Plan 2 NCE","desc":"Exchange Plan 2","unit_price":9.6,"unit_cost":8.73,"qty":4.0,"ext_price":38.4,"margin":3.48,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Asymmetry Group","agr_type":"Recurring Revenue","product_class":"Service","product_id":"365 Cloud Backup","desc":"' 365  Cloud Backup","unit_price":4.72,"unit_cost":1.79,"qty":19.0,"ext_price":89.68,"margin":55.67,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Asymmetry Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"MDR Advanced Malware Protection","desc":"MDR Advanced Malware Protection","unit_price":11.02,"unit_cost":5.4,"qty":36.0,"ext_price":396.72,"margin":202.32,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Asymmetry Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Mimecast","desc":"Mimecast","unit_price":8.0,"unit_cost":5.25,"qty":29.0,"ext_price":232.0,"margin":79.75,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Asymmetry Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Azure AD Premium P1","desc":"Azure Active Directory Premium - P1 plan","unit_price":7.0,"unit_cost":5.5,"qty":2.0,"ext_price":14.0,"margin":3.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Asymmetry Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Print Logic","desc":"Cloud printer management (max 2 shared printers)","unit_price":26.25,"unit_cost":25.0,"qty":1.0,"ext_price":26.25,"margin":1.25,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Asymmetry Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"DMARC Domain Monitoring","desc":"DMARC Domain Monitoring","unit_price":50.0,"unit_cost":10.0,"qty":1.0,"ext_price":50.0,"margin":40.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Asymmetry Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"MS Intune Plan 1  NCE COM MTH","desc":"MS Intune Plan 1","unit_price":2.84,"unit_cost":2.38,"qty":1.0,"ext_price":2.84,"margin":0.46,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Baker Parts, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"Monthly Service Contract","unit_price":235.0,"unit_cost":0.0,"qty":5.0,"ext_price":1175.0,"margin":1175.0,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"Baker Parts, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management - MDR","desc":"MSP systems management","unit_price":5.0,"unit_cost":1.0,"qty":5.0,"ext_price":25.0,"margin":20.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Baker Parts, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"MDR Advanced Malware Protection","desc":"MDR Advanced Malware Protection","unit_price":10.0,"unit_cost":2.9,"qty":5.0,"ext_price":50.0,"margin":35.5,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Baker Parts, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Basic - NCE","desc":"365 Business Basic","unit_price":7.2,"unit_cost":6.04,"qty":10.0,"ext_price":72.0,"margin":11.6,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Baker Parts, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Office E3 NCE","desc":"Office 365 E3","unit_price":27.6,"unit_cost":20.28,"qty":1.0,"ext_price":27.6,"margin":7.32,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Baker Parts, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Apps for Enterprise NCE","desc":"365 Apps for Enterprise NCE","unit_price":14.4,"unit_cost":12.1,"qty":4.0,"ext_price":57.6,"margin":9.2,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"BCK Law","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"Monthly Service Contract","unit_price":672.5,"unit_cost":0.0,"qty":1.0,"ext_price":672.5,"margin":672.5,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"BCK Law","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Dropbox for Business Advanced","desc":"Dropbox Business","unit_price":30.0,"unit_cost":24.0,"qty":3.0,"ext_price":90.0,"margin":18.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"BCK Law","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Mimecast","desc":"Mimecast","unit_price":75.0,"unit_cost":49.35,"qty":1.0,"ext_price":75.0,"margin":25.65,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"BCK Law","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"OneLogin","desc":"Single Sign-On & Access Management","unit_price":11.0,"unit_cost":8.25,"qty":4.0,"ext_price":44.0,"margin":11.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"BCK Law","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Office E3 NCE","desc":"Microsoft Office 365 Enterprise E3 - NCE Monthly","unit_price":27.6,"unit_cost":25.09,"qty":3.0,"ext_price":82.8,"margin":7.53,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"BCK Law","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"MDR Advanced Malware Protection","desc":"MDR Advanced Malware Protection","unit_price":10.0,"unit_cost":5.4,"qty":4.0,"ext_price":40.0,"margin":18.4,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"BCK Law","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management - MDR","desc":"MSP systems management","unit_price":5.0,"unit_cost":3.41,"qty":3.0,"ext_price":15.0,"margin":4.77,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Conflict Dynamics","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Stand non-profit","desc":"365 Business Stand non-profit","unit_price":3.6,"unit_cost":3.38,"qty":14.0,"ext_price":50.4,"margin":3.08,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Conflict Dynamics","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"Monthly Service Contract","unit_price":530.45,"unit_cost":0.0,"qty":1.0,"ext_price":530.45,"margin":530.45,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"Conflict Dynamics","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Mimecast","desc":"Mimecast","unit_price":10.0,"unit_cost":7.26,"qty":13.0,"ext_price":130.0,"margin":35.62,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Conflict Dynamics","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"OneLogin","desc":"Single Sign-On & Access Management","unit_price":10.33,"unit_cost":6.0,"qty":13.0,"ext_price":134.29,"margin":56.29,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Conflict Dynamics","agr_type":"Recurring Revenue","product_class":"Service","product_id":"365 Cloud Backup","desc":"' 365  Cloud Backup","unit_price":4.12,"unit_cost":1.79,"qty":13.0,"ext_price":53.56,"margin":30.29,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Corentus","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"SmartFirm Supported - Monthly Retainer + 1 Employee/computer","unit_price":250.0,"unit_cost":0.0,"qty":1.0,"ext_price":250.0,"margin":250.0,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"Corentus","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"MDR Advanced Malware Protection","desc":"MDR Advanced Malware Protection","unit_price":0.0,"unit_cost":5.4,"qty":1.0,"ext_price":0.0,"margin":-5.4,"flags":["priceless","neg_margin"],"needs_attn":false,"bill":true,"notes":""},{"co":"Corentus","agr_type":"Recurring Revenue","product_class":"Service","product_id":"365 Cloud Backup","desc":"Cloud-to-cloud Backup and Recovery -Per Mailbox / 20 minimum","unit_price":4.5,"unit_cost":1.79,"qty":20.0,"ext_price":90.0,"margin":54.2,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Corentus","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management - MDR","desc":"MSP systems management","unit_price":0.0,"unit_cost":2.2,"qty":1.0,"ext_price":0.0,"margin":-2.2,"flags":["priceless","neg_margin"],"needs_attn":false,"bill":true,"notes":""},{"co":"Corentus","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Basic - NCE","desc":"365 Business Basic","unit_price":7.2,"unit_cost":4.55,"qty":20.0,"ext_price":144.0,"margin":53.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Corentus","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Premium - NCE","desc":"365 Business Premium - NCE Monthly","unit_price":26.4,"unit_cost":24.0,"qty":3.0,"ext_price":79.2,"margin":7.2,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Corentus","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Azure AD Premium P1","desc":"Azure Active Directory Premium - P1 plan","unit_price":6.0,"unit_cost":5.5,"qty":20.0,"ext_price":120.0,"margin":10.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Corentus","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Exchange Plan 2 NCE","desc":"Exchange Plan 2","unit_price":9.6,"unit_cost":8.73,"qty":1.0,"ext_price":9.6,"margin":0.87,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Corentus","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Additional Workstation Man.","desc":"North Light IT - Monthly Costs Per Additional Workstation (only as needed) and Per Additional Employee per/Month","unit_price":75.0,"unit_cost":0.0,"qty":1.0,"ext_price":75.0,"margin":75.0,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"Denterlein Worldwide","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"Monthly Service Contract","unit_price":2690.05,"unit_cost":0.0,"qty":1.0,"ext_price":2690.05,"margin":2690.05,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"Denterlein Worldwide","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Mimecast","desc":"Mimecast","unit_price":10.0,"unit_cost":5.25,"qty":23.0,"ext_price":230.0,"margin":109.25,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Denterlein Worldwide","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Barracuda - backup","desc":"Appliance-based cloud backup","unit_price":330.75,"unit_cost":132.0,"qty":1.0,"ext_price":330.75,"margin":198.75,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Denterlein Worldwide","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"OneLogin","desc":"Single Sign-On & Access Management","unit_price":8.82,"unit_cost":6.0,"qty":23.0,"ext_price":202.86,"margin":64.86,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Denterlein Worldwide","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Dropbox for Business Advanced","desc":"Dropbox Business","unit_price":30.0,"unit_cost":24.0,"qty":22.0,"ext_price":660.0,"margin":132.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Denterlein Worldwide","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Office E3 NCE","desc":"Office 365 E3","unit_price":27.6,"unit_cost":25.09,"qty":23.0,"ext_price":634.8,"margin":57.73,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Denterlein Worldwide","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Teams Rooms Pro","desc":"MS Teams Room Pro","unit_price":48.0,"unit_cost":40.32,"qty":1.0,"ext_price":48.0,"margin":7.68,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Denterlein Worldwide","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"MDR Advanced Malware Protection","desc":"MDR Advanced Malware Protection","unit_price":11.02,"unit_cost":5.4,"qty":30.0,"ext_price":330.6,"margin":168.6,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Denterlein Worldwide","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management - MDR","desc":"MSP systems management","unit_price":5.51,"unit_cost":2.2,"qty":29.0,"ext_price":159.79,"margin":95.99,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Denterlein Worldwide","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Privileged Acct. Management","desc":"Privileged Account Management","unit_price":5.25,"unit_cost":1.48,"qty":25.0,"ext_price":131.25,"margin":94.25,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Denterlein Worldwide","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management - MDR","desc":"MSP systems management","unit_price":5.0,"unit_cost":1.0,"qty":4.0,"ext_price":20.0,"margin":16.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Ecologic","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"Monthly Service Contract: Routine IT & Security plus product support 8 user minimum","unit_price":104.74,"unit_cost":0.0,"qty":8.0,"ext_price":837.92,"margin":837.92,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"Ecologic","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Mimecast","desc":"Mimecast M2a enhanced e-mail filtering and archiving","unit_price":10.0,"unit_cost":5.25,"qty":8.0,"ext_price":80.0,"margin":38.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Ecologic","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Exchange Plan 1 NCE Monthly","desc":"365 Exchange Plan 1 NCE Monthly","unit_price":4.8,"unit_cost":4.03,"qty":1.0,"ext_price":4.8,"margin":0.77,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Ecologic","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Barracuda - backup","desc":"Appliance-based cloud backup with offsite storage replication","unit_price":347.29,"unit_cost":242.0,"qty":1.0,"ext_price":347.29,"margin":105.29,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Ecologic","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"MDR Advanced Malware Protection","desc":"MDR Advanced Malware Protection","unit_price":10.5,"unit_cost":5.4,"qty":12.0,"ext_price":126.0,"margin":61.2,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Ecologic","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Premium - NCE","desc":"365 Business Premium - NCE Monthly","unit_price":26.4,"unit_cost":22.18,"qty":9.0,"ext_price":237.6,"margin":37.98,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Family Estate Planning Law Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"Monthly Service Contract","unit_price":150.0,"unit_cost":0.0,"qty":14.0,"ext_price":2100.0,"margin":2100.0,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"Family Estate Planning Law Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Mimecast","desc":"Mimecast","unit_price":10.0,"unit_cost":6.56,"qty":21.0,"ext_price":210.0,"margin":72.24,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Family Estate Planning Law Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Dropbox for Business Advanced","desc":"Dropbox Business","unit_price":30.0,"unit_cost":24.0,"qty":15.0,"ext_price":450.0,"margin":90.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Family Estate Planning Law Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Azure AD Premium P1","desc":"Azure Active Directory Premium - P1 plan","unit_price":7.2,"unit_cost":6.54,"qty":6.0,"ext_price":43.2,"margin":3.96,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Family Estate Planning Law Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management - MDR","desc":"MSP systems management","unit_price":5.0,"unit_cost":2.2,"qty":18.0,"ext_price":90.0,"margin":50.4,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Family Estate Planning Law Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"MDR Advanced Malware Protection","desc":"MDR Advanced Malware Protection","unit_price":10.0,"unit_cost":5.4,"qty":18.0,"ext_price":180.0,"margin":82.8,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Family Estate Planning Law Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"KnowBe4","desc":"Security Awareness Training","unit_price":2.5,"unit_cost":1.44,"qty":14.0,"ext_price":35.0,"margin":14.84,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Family Estate Planning Law Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Premium - NCE","desc":"365 Business Premium - NCE Monthly","unit_price":26.4,"unit_cost":24.0,"qty":15.0,"ext_price":396.0,"margin":36.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Family Estate Planning Law Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Exchange Plan 1 NCE Monthly","desc":"365 Exchange Plan 1 NCE Monthly","unit_price":4.8,"unit_cost":4.03,"qty":5.0,"ext_price":24.0,"margin":3.85,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Family Estate Planning Law Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Print Logic","desc":"Cloud printer management","unit_price":50.0,"unit_cost":50.0,"qty":4.0,"ext_price":200.0,"margin":0.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Family Estate Planning Law Group","agr_type":"Recurring Revenue","product_class":"Service","product_id":"365 Cloud Backup","desc":"' 365  Cloud Backup","unit_price":4.5,"unit_cost":1.79,"qty":21.0,"ext_price":94.5,"margin":56.91,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Family Estate Planning Law Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Password Manager","desc":"Password Manager","unit_price":100.0,"unit_cost":60.0,"qty":1.0,"ext_price":100.0,"margin":40.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Family Estate Planning Law Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"DMARC Domain Monitoring","desc":"DMARC Domain Monitoring - 2 active, 7\"parked\"","unit_price":140.0,"unit_cost":20.0,"qty":1.0,"ext_price":140.0,"margin":120.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Family Estate Planning Law Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Privileged Acct. Management","desc":"Privileged Account Management","unit_price":5.0,"unit_cost":1.48,"qty":18.0,"ext_price":90.0,"margin":63.36,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Family Estate Planning Law Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Threat Protect - Huntress","desc":"365 Threat Protection","unit_price":4.0,"unit_cost":2.0,"qty":21.0,"ext_price":84.0,"margin":42.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Family Estate Planning Law Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Advanced Patching","desc":"Advanced Patching","unit_price":4.0,"unit_cost":2.0,"qty":18.0,"ext_price":72.0,"margin":36.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"The Doug Flutie, Jr. Foundation","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"Managed IT Support Services","unit_price":1157.63,"unit_cost":0.0,"qty":1.0,"ext_price":1157.63,"margin":1157.63,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"The Doug Flutie, Jr. Foundation","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Mimecast","desc":"Mimecast","unit_price":10.0,"unit_cost":5.25,"qty":16.0,"ext_price":160.0,"margin":76.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"The Doug Flutie, Jr. Foundation","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"MDR Advanced Malware Protection","desc":"MDR Advanced Malware Protection","unit_price":11.02,"unit_cost":5.4,"qty":10.0,"ext_price":110.2,"margin":56.2,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"The Doug Flutie, Jr. Foundation","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"DMARC Domain Monitoring","desc":"DMARC Domain Monitoring - 1 active","unit_price":50.0,"unit_cost":10.0,"qty":1.0,"ext_price":50.0,"margin":40.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"George J Roberts CPA","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"SmartFirm Supported - Monthly Retainer + 1 Employee/computer","unit_price":225.0,"unit_cost":0.0,"qty":1.0,"ext_price":225.0,"margin":225.0,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"George J Roberts CPA","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Additional Employee","desc":"Per additional Employee","unit_price":25.0,"unit_cost":0.0,"qty":4.0,"ext_price":100.0,"margin":100.0,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"George J Roberts CPA","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"MDR Advanced Malware Protection","desc":"MDR Advanced Malware Protection","unit_price":15.0,"unit_cost":2.9,"qty":4.0,"ext_price":60.0,"margin":48.4,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"George J Roberts CPA","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management - MDR","desc":"MSP systems management","unit_price":10.0,"unit_cost":1.0,"qty":4.0,"ext_price":40.0,"margin":36.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"George J Roberts CPA","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Stand - NCE Month","desc":"365 Business Standard - NCE Monthly","unit_price":15.0,"unit_cost":12.6,"qty":5.0,"ext_price":75.0,"margin":12.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"The Law Office of Gina J. Calabro","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Premium - NCE","desc":"365 Business Premium - NCE Monthly","unit_price":26.4,"unit_cost":24.0,"qty":3.0,"ext_price":79.2,"margin":7.2,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"The Law Office of Gina J. Calabro","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"MDR Advanced Malware Protection","desc":"MDR Advanced Malware Protection","unit_price":10.0,"unit_cost":5.4,"qty":1.0,"ext_price":10.0,"margin":4.6,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"The Law Office of Gina J. Calabro","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management - MDR","desc":"MSP systems management","unit_price":10.0,"unit_cost":2.2,"qty":1.0,"ext_price":10.0,"margin":7.8,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Grafton Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"Monthly Service Contract","unit_price":1074.8,"unit_cost":0.0,"qty":1.0,"ext_price":1074.8,"margin":1074.8,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"Grafton Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Apps for Business - NCE","desc":"365 Apps for Business - monthly","unit_price":10.0,"unit_cost":9.06,"qty":9.0,"ext_price":90.0,"margin":8.46,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Grafton Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Basic - NCE","desc":"365 Business Basic","unit_price":7.2,"unit_cost":4.55,"qty":51.0,"ext_price":367.2,"margin":135.15,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Grafton Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management - MDR","desc":"MSP systems management","unit_price":5.51,"unit_cost":2.2,"qty":17.0,"ext_price":93.67,"margin":56.27,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Grafton Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"MDR Advanced Malware Protection","desc":"MDR Advanced Malware Protection","unit_price":8.82,"unit_cost":5.4,"qty":12.0,"ext_price":105.84,"margin":41.04,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Grafton Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Integrated E-Mail security","desc":"365 Integrated E-Mail security","unit_price":8.0,"unit_cost":5.0,"qty":40.0,"ext_price":320.0,"margin":120.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Hacin Architects, LLC.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"Monthly IT Consulting Retainer - basic plan","unit_price":4323.32,"unit_cost":0.0,"qty":1.0,"ext_price":4323.32,"margin":4323.32,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"Hacin Architects, LLC.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Barracuda - backup","desc":"Appliance-based cloud backup","unit_price":1170.36,"unit_cost":778.0,"qty":1.0,"ext_price":1170.36,"margin":392.36,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Hacin Architects, LLC.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Dropbox for Business Advanced","desc":"Dropbox Business","unit_price":30.0,"unit_cost":24.0,"qty":45.0,"ext_price":1350.0,"margin":270.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Hacin Architects, LLC.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Mimecast","desc":"Mimecast","unit_price":10.0,"unit_cost":5.25,"qty":33.0,"ext_price":330.0,"margin":156.75,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Hacin Architects, LLC.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Office E3 NCE","desc":"Microsoft office 365 Enterprise E3 -  NCE  monthly","unit_price":27.6,"unit_cost":23.19,"qty":21.0,"ext_price":579.6,"margin":92.61,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Hacin Architects, LLC.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"KnowBe4","desc":"Security Awareness Training","unit_price":2.62,"unit_cost":1.44,"qty":40.0,"ext_price":104.8,"margin":47.2,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Hacin Architects, LLC.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management - MDR","desc":"MSP systems management","unit_price":5.51,"unit_cost":2.2,"qty":60.0,"ext_price":330.6,"margin":198.6,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Hacin Architects, LLC.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"OneLogin","desc":"Single Sign-On & Access Management","unit_price":8.82,"unit_cost":6.0,"qty":40.0,"ext_price":352.8,"margin":112.8,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Hacin Architects, LLC.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"MDR Advanced Malware Protection","desc":"MDR Advanced Malware Protection","unit_price":11.02,"unit_cost":5.4,"qty":60.0,"ext_price":661.2,"margin":337.2,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Hacin Architects, LLC.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Exchange Plan 2 NCE","desc":"Exchange Plan 2","unit_price":9.6,"unit_cost":8.07,"qty":1.0,"ext_price":9.6,"margin":1.53,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Herbst Law Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"North Light IT Managed IT Helpdesk & Proactive Support Services","unit_price":175.0,"unit_cost":0.0,"qty":6.0,"ext_price":1050.0,"margin":1050.0,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"Herbst Law Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"MDR Advanced Malware Protection","desc":"Next Generation Endpoint Threat Protection","unit_price":10.0,"unit_cost":5.4,"qty":6.0,"ext_price":60.0,"margin":27.6,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Herbst Law Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management - MDR","desc":"Workstation Management, patching, monitoring","unit_price":5.0,"unit_cost":2.2,"qty":6.0,"ext_price":30.0,"margin":16.8,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Herbst Law Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Additional Workstation Man.","desc":"Additional workstation management","unit_price":25.0,"unit_cost":0.0,"qty":2.0,"ext_price":50.0,"margin":50.0,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"Herbst Law Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Mimecast","desc":"Mimecast","unit_price":10.0,"unit_cost":5.88,"qty":6.0,"ext_price":60.0,"margin":24.72,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Herbst Law Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Stand - NCE Month","desc":"365 Business Standard - NCE Monthly","unit_price":15.0,"unit_cost":12.6,"qty":2.0,"ext_price":30.0,"margin":4.8,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"ISM Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"Monthly Service Contract","unit_price":2604.66,"unit_cost":0.0,"qty":1.0,"ext_price":2604.66,"margin":2604.66,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"ISM Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management","desc":"MSP systems management & AntiVirus","unit_price":5.51,"unit_cost":2.16,"qty":20.0,"ext_price":110.2,"margin":67.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"ISM Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Exchange Plan 2 NCE","desc":"Exchange Plan 2 monthly","unit_price":10.0,"unit_cost":6.72,"qty":6.0,"ext_price":60.0,"margin":19.68,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"ISM Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Stand - NCE Month","desc":"365 Business Standard - NCE Monthly","unit_price":15.0,"unit_cost":12.6,"qty":28.0,"ext_price":420.0,"margin":67.2,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"ISM Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Basic - NCE","desc":"365 Business Basic - monthly","unit_price":7.2,"unit_cost":4.55,"qty":4.0,"ext_price":28.8,"margin":10.6,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"ISM Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Exchange Plan 1 NCE Monthly","desc":"365 Exchange Plan 1 NCE Monthly","unit_price":4.8,"unit_cost":4.03,"qty":1.0,"ext_price":4.8,"margin":0.77,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"ISM Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Project Plan 3 NCE","desc":"365 Project Plan 3","unit_price":36.0,"unit_cost":32.72,"qty":2.0,"ext_price":72.0,"margin":6.56,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"ISM Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Audio Conferencing - NCE","desc":"365 Audio Conferencing","unit_price":3.0,"unit_cost":3.0,"qty":4.0,"ext_price":12.0,"margin":0.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"ISM Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Apps for Business - NCE","desc":"365 Apps for Business - monthly","unit_price":9.96,"unit_cost":9.06,"qty":1.0,"ext_price":9.96,"margin":0.9,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"ISM Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Onedrive  Bus. plan 2  NCE","desc":"365 Onedrive for Business plan 2","unit_price":12.0,"unit_cost":10.91,"qty":1.0,"ext_price":12.0,"margin":1.09,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"ISM Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"NCGIT Cloud backup","desc":"cloud environment  backups","unit_price":262.5,"unit_cost":180.0,"qty":1.0,"ext_price":262.5,"margin":82.5,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"ISM Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"MS Azure NCE","desc":"Azure cloud hosting - variable usage","unit_price":1500.0,"unit_cost":853.21,"qty":1.0,"ext_price":1500.0,"margin":646.79,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"KC Real Estate","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Barracuda - backup","desc":"Appliance-based cloud backup","unit_price":152.0,"unit_cost":152.0,"qty":1.0,"ext_price":152.0,"margin":0.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"KC Real Estate","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Mimecast","desc":"Mimecast","unit_price":31.49,"unit_cost":31.49,"qty":1.0,"ext_price":31.49,"margin":0.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"KC Real Estate","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Apps for Business - NCE","desc":"365 Apps for Business - monthly","unit_price":9.96,"unit_cost":8.36,"qty":1.0,"ext_price":9.96,"margin":1.6,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"KC Real Estate","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Stand - NCE Month","desc":"365 Business Standard - NCE Monthly","unit_price":15.0,"unit_cost":12.6,"qty":5.0,"ext_price":75.0,"margin":12.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"KC Real Estate","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Basic - NCE","desc":"365 Business Basic monthly","unit_price":7.2,"unit_cost":4.55,"qty":4.0,"ext_price":28.8,"margin":10.6,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"KC Real Estate","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"OneLogin","desc":"Single Sign-On & Access Management","unit_price":8.0,"unit_cost":6.0,"qty":10.0,"ext_price":80.0,"margin":20.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"KC Real Estate","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"MDR Advanced Malware Protection","desc":"MDR Advanced Malware Protection","unit_price":10.0,"unit_cost":5.4,"qty":13.0,"ext_price":130.0,"margin":59.8,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"KC Real Estate","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Privileged Acct. Management","desc":"Privileged Account Management","unit_price":5.0,"unit_cost":1.48,"qty":8.0,"ext_price":40.0,"margin":28.16,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"KC Real Estate","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Threat Protect - Huntress","desc":"365 Threat Protection","unit_price":4.0,"unit_cost":2.0,"qty":9.0,"ext_price":36.0,"margin":18.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Kobe Law","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Stand - NCE Month","desc":"365 Business Standard - NCE Monthly","unit_price":15.0,"unit_cost":12.6,"qty":1.0,"ext_price":15.0,"margin":2.4,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Lipton Law Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"SmartFirm Supported - Monthly Retainer + 1 Employee/computer","unit_price":235.0,"unit_cost":0.0,"qty":1.0,"ext_price":235.0,"margin":235.0,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"Lipton Law Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Additional Employee","desc":"Per additional Employee","unit_price":35.0,"unit_cost":0.0,"qty":1.0,"ext_price":35.0,"margin":35.0,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"Lipton Law Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Additional Workstation Man.","desc":"Additional workstation management","unit_price":10.0,"unit_cost":0.0,"qty":1.0,"ext_price":10.0,"margin":10.0,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"Lipton Law Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"MDR Advanced Malware Protection","desc":"MDR Advanced Malware Protection","unit_price":15.0,"unit_cost":2.9,"qty":2.0,"ext_price":30.0,"margin":24.2,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Lipton Law Group","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management - MDR","desc":"MSP systems management","unit_price":10.0,"unit_cost":1.0,"qty":2.0,"ext_price":20.0,"margin":18.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Longwood Venues and Destinations","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"North Light IT Managed IT Service - Monthly User Costs Per Full User","unit_price":110.0,"unit_cost":0.0,"qty":37.0,"ext_price":4070.0,"margin":4070.0,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"Longwood Venues and Destinations","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Additional Workstation Man.","desc":"Additional workstation management","unit_price":10.0,"unit_cost":0.0,"qty":9.0,"ext_price":90.0,"margin":90.0,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"Longwood Venues and Destinations","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"MDR Advanced Malware Protection","desc":"MDR Advanced Malware Protection","unit_price":10.0,"unit_cost":2.9,"qty":46.0,"ext_price":460.0,"margin":326.6,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Longwood Venues and Destinations","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management - MDR","desc":"MSP systems management","unit_price":5.0,"unit_cost":1.0,"qty":46.0,"ext_price":230.0,"margin":184.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Longwood Venues and Destinations","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"MS Intune Plan 1 NCE","desc":"MS Intune Plan 1","unit_price":9.6,"unit_cost":8.07,"qty":1.0,"ext_price":9.6,"margin":1.53,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Longwood Venues and Destinations","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Premium - NCE","desc":"365 Business Premium - NCE Monthly","unit_price":26.4,"unit_cost":22.18,"qty":48.0,"ext_price":1267.2,"margin":202.56,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Longwood Venues and Destinations","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Exchange Plan 1 NCE Monthly","desc":"365 Exchange Plan 1 NCE Monthly","unit_price":4.8,"unit_cost":4.03,"qty":4.0,"ext_price":19.2,"margin":3.08,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Longwood Venues and Destinations","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Exchange Plan 2 NCE","desc":"Exchange Plan 2","unit_price":9.6,"unit_cost":8.73,"qty":2.0,"ext_price":19.2,"margin":1.74,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Mass Restaurant Association","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"Monthly IT Consulting Retainer","unit_price":1003.25,"unit_cost":0.0,"qty":1.0,"ext_price":1003.25,"margin":1003.25,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"Mass Restaurant Association","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Dropbox for Business Advanced","desc":"Dropbox Business","unit_price":30.0,"unit_cost":24.0,"qty":10.0,"ext_price":300.0,"margin":60.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Mass Restaurant Association","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Premium - NCE","desc":"365 Business Premium - NCE Monthly","unit_price":26.4,"unit_cost":24.0,"qty":10.0,"ext_price":264.0,"margin":24.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Mass Restaurant Association","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Mimecast","desc":"Mimecast","unit_price":156.05,"unit_cost":56.25,"qty":1.0,"ext_price":156.05,"margin":99.8,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Mass Restaurant Association","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management - MDR","desc":"MSP systems management","unit_price":5.25,"unit_cost":1.0,"qty":11.0,"ext_price":57.75,"margin":46.75,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Mass Restaurant Association","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"MDR Advanced Malware Protection","desc":"MDR Advanced Malware Protection","unit_price":10.5,"unit_cost":2.9,"qty":11.0,"ext_price":115.5,"margin":83.6,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Mass Restaurant Association","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Threat Protect - Huntress","desc":"365 Threat Protection","unit_price":4.0,"unit_cost":2.0,"qty":9.0,"ext_price":36.0,"margin":18.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Mass Restaurant Association","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"MS Intune Plan 1  NCE COM MTH","desc":"MS Intune Plan 1","unit_price":4.8,"unit_cost":4.03,"qty":1.0,"ext_price":4.8,"margin":0.77,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"McCormack Builders","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Dropbox for Business Advanced","desc":"Dropbox Business","unit_price":30.0,"unit_cost":24.0,"qty":11.0,"ext_price":330.0,"margin":66.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"McCormack Builders","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management","desc":"MSP systems management & AntiVirus","unit_price":5.51,"unit_cost":2.75,"qty":5.0,"ext_price":27.55,"margin":13.8,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"McCormack Builders","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"Monthly Service Contract","unit_price":733.87,"unit_cost":0.0,"qty":1.0,"ext_price":733.87,"margin":733.87,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"McCormack Builders","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Basic - NCE","desc":"365 Business Basic NCE Monthly","unit_price":7.2,"unit_cost":4.55,"qty":4.0,"ext_price":28.8,"margin":10.6,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"McCormack Builders","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Stand - NCE Month","desc":"365 Business Standard - NCE Monthly","unit_price":15.0,"unit_cost":12.6,"qty":11.0,"ext_price":165.0,"margin":26.4,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"MIAA MSAA","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"Monthly Service Contract","unit_price":6500.0,"unit_cost":0.0,"qty":1.0,"ext_price":6500.0,"margin":6500.0,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"MIAA MSAA","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Barracuda - backup","desc":"Appliance-based cloud backup","unit_price":600.0,"unit_cost":440.0,"qty":1.0,"ext_price":600.0,"margin":160.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"MIAA MSAA","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 E1 - Monthly NCE","desc":"Microsoft Office 365 Enterprise E1 - Monthly","unit_price":12.0,"unit_cost":10.91,"qty":4.0,"ext_price":48.0,"margin":4.36,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"MIAA MSAA","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Stand - NCE Month","desc":"365 Business Standard - NCE Monthly","unit_price":15.0,"unit_cost":12.6,"qty":24.0,"ext_price":360.0,"margin":57.6,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"MIAA MSAA","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"OneLogin","desc":"Single Sign-On & Access Management","unit_price":10.0,"unit_cost":6.0,"qty":31.0,"ext_price":310.0,"margin":124.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"MIAA MSAA","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Exchange Plan 1 NCE Monthly","desc":"365 Exchange Plan 1 NCE Monthly","unit_price":4.8,"unit_cost":4.03,"qty":3.0,"ext_price":14.4,"margin":2.31,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"MIAA MSAA","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Mimecast","desc":"Mimecast","unit_price":8.0,"unit_cost":5.25,"qty":30.0,"ext_price":240.0,"margin":82.5,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"MIAA MSAA","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"MDR Advanced Malware Protection","desc":"MDR Advanced Malware Protection","unit_price":10.0,"unit_cost":5.4,"qty":36.0,"ext_price":360.0,"margin":165.6,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"MIAA MSAA","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management - MDR","desc":"MSP systems management","unit_price":5.0,"unit_cost":2.2,"qty":36.0,"ext_price":180.0,"margin":100.8,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"MIAA MSAA","agr_type":"Recurring Revenue","product_class":"Service","product_id":"365 Cloud Backup","desc":"' 365  Cloud Backup","unit_price":4.0,"unit_cost":1.79,"qty":30.0,"ext_price":120.0,"margin":66.3,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"MIAA MSAA","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Dropbox for Business Advanced","desc":"Dropbox Business","unit_price":30.0,"unit_cost":24.0,"qty":24.0,"ext_price":720.0,"margin":144.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"MIAA MSAA","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"DMARC Domain Monitoring","desc":"DMARC Domain Monitoring - 2 active, 4 parked","unit_price":115.0,"unit_cost":20.0,"qty":1.0,"ext_price":115.0,"margin":95.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"MIAA MSAA","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Apps for Business - NCE","desc":"365 Apps for Business - monthly","unit_price":9.96,"unit_cost":9.06,"qty":2.0,"ext_price":19.92,"margin":1.8,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"MIAA MSAA","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Print Logic","desc":"Cloud printer management","unit_price":50.0,"unit_cost":7.5,"qty":2.0,"ext_price":100.0,"margin":85.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Miner Siddall","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"Monthly Service Contract","unit_price":950.0,"unit_cost":0.0,"qty":1.0,"ext_price":950.0,"margin":950.0,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"Miner Siddall","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management","desc":"MSP systems management & AntiVirus","unit_price":5.25,"unit_cost":2.75,"qty":5.0,"ext_price":26.25,"margin":12.5,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"naasr","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"Monthly IT Consulting Retainer - basic support","unit_price":648.33,"unit_cost":0.0,"qty":1.0,"ext_price":648.33,"margin":648.33,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"naasr","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management","desc":"MSP systems management & AntiVirus","unit_price":5.15,"unit_cost":3.41,"qty":9.0,"ext_price":46.35,"margin":15.66,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"naasr","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Dropbox for Business Advanced","desc":"Dropbox Business","unit_price":30.0,"unit_cost":24.0,"qty":13.0,"ext_price":390.0,"margin":78.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"naasr","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"OneLogin","desc":"Single Sign-On & Access Management","unit_price":8.24,"unit_cost":6.0,"qty":16.0,"ext_price":131.84,"margin":35.84,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"naasr","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Prem. NP NCE","desc":"365 Business Premium non-profit","unit_price":6.6,"unit_cost":6.2,"qty":1.0,"ext_price":6.6,"margin":0.4,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"naasr","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Exchange Plan 2 NCE","desc":"Exchange Plan 2","unit_price":9.6,"unit_cost":8.73,"qty":1.0,"ext_price":9.6,"margin":0.87,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"naasr","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Stand non-profit","desc":"365 Business Stand non-profit","unit_price":3.6,"unit_cost":3.38,"qty":10.0,"ext_price":36.0,"margin":2.2,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Nova Sports USA, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"Monthly Service Contract","unit_price":1762.61,"unit_cost":0.0,"qty":1.0,"ext_price":1762.61,"margin":1762.61,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"Nova Sports USA, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Mimecast","desc":"Mimecast","unit_price":119.0,"unit_cost":56.87,"qty":1.0,"ext_price":119.0,"margin":62.13,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Nova Sports USA, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Barracuda - backup","desc":"Appliance-based cloud backup - 4TB","unit_price":462.72,"unit_cost":301.0,"qty":1.0,"ext_price":462.72,"margin":161.72,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Nova Sports USA, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 E1 - Monthly NCE","desc":"Microsoft Office 365 Enterprise E1 - Monthly","unit_price":12.0,"unit_cost":10.91,"qty":4.0,"ext_price":48.0,"margin":4.36,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Nova Sports USA, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Exchange Plan 2 NCE","desc":"Microsoft Exchange Online Plan 2 - 100GB Mailbox - NCE Monthly","unit_price":9.6,"unit_cost":8.73,"qty":2.0,"ext_price":19.2,"margin":1.74,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Nova Sports USA, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Stand - NCE Month","desc":"365 Business Standard - NCE Monthly","unit_price":15.0,"unit_cost":12.6,"qty":9.0,"ext_price":135.0,"margin":21.6,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Nova Sports USA, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"OneLogin","desc":"Single Sign-On & Access Management","unit_price":12.13,"unit_cost":8.25,"qty":10.0,"ext_price":121.3,"margin":38.8,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Nova Sports USA, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management - MDR","desc":"MSP systems management","unit_price":5.51,"unit_cost":2.2,"qty":15.0,"ext_price":82.65,"margin":49.65,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Nova Sports USA, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"MDR Advanced Malware Protection","desc":"MDR Advanced Malware Protection","unit_price":11.03,"unit_cost":5.4,"qty":15.0,"ext_price":165.45,"margin":84.45,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Nova Sports USA, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Print Logic","desc":"Cloud printer management","unit_price":52.5,"unit_cost":50.0,"qty":5.0,"ext_price":262.5,"margin":12.5,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"PJ Spillane Company, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"Monthly Service Contract","unit_price":2474.13,"unit_cost":0.0,"qty":1.0,"ext_price":2474.13,"margin":2474.13,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"PJ Spillane Company, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Barracuda - backup","desc":"Appliance-based cloud backup","unit_price":1173.44,"unit_cost":688.0,"qty":1.0,"ext_price":1173.44,"margin":485.44,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"PJ Spillane Company, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Mimecast","desc":"Mimecast w/ targeted threat protection","unit_price":7.0,"unit_cost":5.25,"qty":50.0,"ext_price":350.0,"margin":87.5,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"PJ Spillane Company, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"OneLogin","desc":"OneLogin IAM and two factor authentication","unit_price":8.65,"unit_cost":6.0,"qty":106.0,"ext_price":916.9,"margin":280.9,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"PJ Spillane Company, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Exchange Plan 1 NCE Monthly","desc":"Microsoft Office 365 Exchange Online plan 1 - monthly","unit_price":4.8,"unit_cost":4.03,"qty":19.0,"ext_price":91.2,"margin":14.63,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"PJ Spillane Company, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Exchange Plan 2 NCE","desc":"Microsoft Exchange Online Plan 2 - 100GB Mailbox - Monthly","unit_price":9.6,"unit_cost":8.73,"qty":9.0,"ext_price":86.4,"margin":7.83,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"PJ Spillane Company, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Stand - NCE Month","desc":"365 Business Standard - NCE Monthly","unit_price":15.0,"unit_cost":12.6,"qty":33.0,"ext_price":495.0,"margin":79.2,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"PJ Spillane Company, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management - MDR","desc":"MSP systems management","unit_price":5.41,"unit_cost":2.2,"qty":57.0,"ext_price":308.37,"margin":182.97,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"PJ Spillane Company, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"MDR Advanced Malware Protection","desc":"MDR Advanced Malware Protection","unit_price":10.82,"unit_cost":5.4,"qty":57.0,"ext_price":616.74,"margin":308.94,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"PJ Spillane Company, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Print Logic","desc":"Cloud printer management","unit_price":51.5,"unit_cost":50.0,"qty":1.0,"ext_price":51.5,"margin":1.5,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"PJ Spillane Company, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Basic - NCE","desc":"365 Business Basic","unit_price":7.2,"unit_cost":4.55,"qty":56.0,"ext_price":403.2,"margin":148.4,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"PJ Spillane Company, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Project Plan 3 NCE","desc":"365 Project Plan 3","unit_price":36.0,"unit_cost":32.72,"qty":12.0,"ext_price":432.0,"margin":39.36,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"PJ Spillane Company, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Power BI Pro","desc":"Power BI Pro","unit_price":16.8,"unit_cost":14.11,"qty":6.0,"ext_price":100.8,"margin":16.14,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Pediatric Associates of Brockton","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"Monthly Service Contract","unit_price":750.0,"unit_cost":0.0,"qty":1.0,"ext_price":750.0,"margin":750.0,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"PKO","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"Monthly Service Contract","unit_price":1122.52,"unit_cost":0.0,"qty":1.0,"ext_price":1122.52,"margin":1122.52,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"PKO","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management","desc":"MSP systems management & AntiVirus","unit_price":5.51,"unit_cost":3.41,"qty":12.0,"ext_price":66.12,"margin":25.2,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"PKO","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Mimecast","desc":"Mimecast","unit_price":10.0,"unit_cost":3.77,"qty":12.0,"ext_price":120.0,"margin":74.76,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"PKO","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"NCGIT Cloud backup","desc":"Direct to cloud backup","unit_price":49.59,"unit_cost":34.6,"qty":1.0,"ext_price":49.59,"margin":14.99,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"PKO","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Exchange Plan 2 NCE","desc":"Microsoft Exchange Online Plan 2 - 100GB Mailbox -  NCE Monthly","unit_price":9.6,"unit_cost":8.73,"qty":10.0,"ext_price":96.0,"margin":8.7,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"PKO","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Dropbox for Business Advanced","desc":"Dropbox Business","unit_price":30.0,"unit_cost":24.0,"qty":11.0,"ext_price":330.0,"margin":66.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"PKO","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Stand - NCE Month","desc":"365 Business Standard - NCE Monthly","unit_price":15.0,"unit_cost":12.6,"qty":11.0,"ext_price":165.0,"margin":26.4,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"PP Systems","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"Monthly Service Contract","unit_price":136.5,"unit_cost":0.0,"qty":15.0,"ext_price":2047.5,"margin":2047.5,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"PP Systems","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management - MDR","desc":"MSP systems management","unit_price":5.25,"unit_cost":2.2,"qty":30.0,"ext_price":157.5,"margin":91.5,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"PP Systems","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Premium - NCE","desc":"365 Business Premium - NCE Monthly","unit_price":26.4,"unit_cost":24.0,"qty":14.0,"ext_price":369.6,"margin":33.6,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"PP Systems","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Exchange Plan 1 NCE Monthly","desc":"365 Exchange Plan 1 NCE Monthly","unit_price":4.8,"unit_cost":4.03,"qty":6.0,"ext_price":28.8,"margin":4.62,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"PP Systems","agr_type":"Recurring Revenue","product_class":"Service","product_id":"365 Cloud Backup","desc":"' 365  Cloud Backup","unit_price":4.2,"unit_cost":1.79,"qty":15.0,"ext_price":63.0,"margin":36.15,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"PP Systems","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"MDR Advanced Malware Protection","desc":"MDR Advanced Malware Protection","unit_price":10.5,"unit_cost":5.4,"qty":15.0,"ext_price":157.5,"margin":76.5,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"PP Systems","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Barracuda - backup","desc":"Barracuda backup appliance + Cloud storage, 4/2TB capacity","unit_price":467.25,"unit_cost":315.0,"qty":1.0,"ext_price":467.25,"margin":152.25,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"PP Systems","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Mimecast","desc":"Mimecast","unit_price":9.0,"unit_cost":5.0,"qty":15.0,"ext_price":135.0,"margin":60.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Protectowire Co., Inc","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"Monthly Service Contract","unit_price":1634.96,"unit_cost":0.0,"qty":1.0,"ext_price":1634.96,"margin":1634.96,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"Protectowire Co., Inc","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Mimecast","desc":"Mimecast","unit_price":10.0,"unit_cost":5.25,"qty":37.0,"ext_price":370.0,"margin":175.75,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Protectowire Co., Inc","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Barracuda - backup","desc":"Appliance-based cloud backup","unit_price":1261.05,"unit_cost":1019.28,"qty":1.0,"ext_price":1261.05,"margin":241.77,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Protectowire Co., Inc","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"OneLogin","desc":"Single Sign-On & Access Management","unit_price":8.4,"unit_cost":6.0,"qty":52.0,"ext_price":436.8,"margin":124.8,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Protectowire Co., Inc","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"DMARC Domain Monitoring","desc":"DMARC Domain Monitoring - 1 active domain","unit_price":50.0,"unit_cost":10.0,"qty":1.0,"ext_price":50.0,"margin":40.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Protectowire Co., Inc","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Privileged Acct. Management","desc":"Privileged Account Management","unit_price":5.25,"unit_cost":1.48,"qty":54.0,"ext_price":283.5,"margin":203.58,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Protectowire Co., Inc","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"MDR Advanced Malware Protection","desc":"MDR Advanced Malware Protection","unit_price":10.5,"unit_cost":5.4,"qty":65.0,"ext_price":682.5,"margin":331.5,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Protectowire Co., Inc","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management - MDR","desc":"MSP systems management","unit_price":5.25,"unit_cost":2.2,"qty":65.0,"ext_price":341.25,"margin":198.25,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Protectowire Co., Inc","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Project Plan 3 NCE","desc":"365 Project Plan 3","unit_price":36.0,"unit_cost":32.72,"qty":1.0,"ext_price":36.0,"margin":3.28,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Resource Insight, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"Monthly IT Consulting Retainer","unit_price":500.0,"unit_cost":0.0,"qty":1.0,"ext_price":500.0,"margin":500.0,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"Resource Insight, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management","desc":"MSP systems management & AntiVirus","unit_price":5.0,"unit_cost":3.41,"qty":4.0,"ext_price":20.0,"margin":6.36,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Resource Insight, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Dropbox for Business Advanced","desc":"Dropbox Business","unit_price":30.0,"unit_cost":24.0,"qty":3.0,"ext_price":90.0,"margin":18.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Resource Insight, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Exchange Plan 2 NCE","desc":"Exchange Plan 2  - NCE Monthly","unit_price":9.6,"unit_cost":8.73,"qty":1.0,"ext_price":9.6,"margin":0.87,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Resource Insight, Inc.","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Stand - NCE Month","desc":"365 Business Standard - NCE Monthly","unit_price":15.0,"unit_cost":12.6,"qty":3.0,"ext_price":45.0,"margin":7.2,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Roark & Mansur Law, PLLC","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"Monthly Service High Security Support  Contract","unit_price":215.51,"unit_cost":0.0,"qty":7.0,"ext_price":1508.57,"margin":1508.57,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"Roark & Mansur Law, PLLC","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management - MDR","desc":"MSP systems management","unit_price":5.51,"unit_cost":2.2,"qty":10.0,"ext_price":55.1,"margin":33.1,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Roark & Mansur Law, PLLC","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"MDR Advanced Malware Protection","desc":"MDR Advanced Malware Protection","unit_price":11.02,"unit_cost":5.4,"qty":10.0,"ext_price":110.2,"margin":56.2,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Roark & Mansur Law, PLLC","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Premium - NCE","desc":"365 Business Premium - NCE Monthly","unit_price":26.4,"unit_cost":24.0,"qty":16.0,"ext_price":422.4,"margin":38.4,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Roark & Mansur Law, PLLC","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Exchange Plan 2 NCE","desc":"Exchange Plan 2","unit_price":9.6,"unit_cost":6.72,"qty":1.0,"ext_price":9.6,"margin":2.88,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Roark & Mansur Law, PLLC","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Mimecast","desc":"Mimecast","unit_price":10.0,"unit_cost":5.0,"qty":7.0,"ext_price":70.0,"margin":35.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Roark & Mansur Law, PLLC","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Print Logic","desc":"Cloud printer management","unit_price":26.25,"unit_cost":7.5,"qty":3.0,"ext_price":78.75,"margin":56.25,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Roark & Mansur Law, PLLC","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Password Manager","desc":"Password Manager","unit_price":5.25,"unit_cost":0.0,"qty":10.0,"ext_price":52.5,"margin":52.5,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"Roark & Mansur Law, PLLC","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Privileged Acct. Management","desc":"Privileged Account Management","unit_price":4.0,"unit_cost":1.48,"qty":14.0,"ext_price":56.0,"margin":35.28,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Steven Rotella CPA","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"Monthly Service Contract","unit_price":735.99,"unit_cost":0.0,"qty":1.0,"ext_price":735.99,"margin":735.99,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"Steven Rotella CPA","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management","desc":"MSP systems management & AntiVirus","unit_price":5.51,"unit_cost":3.41,"qty":5.0,"ext_price":27.55,"margin":10.5,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Steven Rotella CPA","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Barracuda - backup","desc":"Appliance-based cloud backup","unit_price":231.52,"unit_cost":152.0,"qty":1.0,"ext_price":231.52,"margin":79.52,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Schwartz/Silver","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"Monthly Service Contract","unit_price":198.21,"unit_cost":0.0,"qty":26.0,"ext_price":5153.46,"margin":5153.46,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"Schwartz/Silver","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Mimecast","desc":"Mimecast","unit_price":10.0,"unit_cost":5.25,"qty":25.0,"ext_price":250.0,"margin":118.75,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Schwartz/Silver","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Barracuda - backup","desc":"Appliance-based cloud backup","unit_price":1171.36,"unit_cost":778.0,"qty":1.0,"ext_price":1171.36,"margin":393.36,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Schwartz/Silver","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Cloud Service (Non-Tax)","desc":"Monthly Contract NetEnrich","unit_price":-200.0,"unit_cost":0.0,"qty":1.0,"ext_price":-200.0,"margin":-200.0,"flags":["neg_margin"],"needs_attn":false,"bill":true,"notes":""},{"co":"Schwartz/Silver","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Apps for Business - NCE","desc":"365 Apps for Business - monthly","unit_price":8.25,"unit_cost":8.36,"qty":1.0,"ext_price":8.25,"margin":-0.11,"flags":["neg_margin"],"needs_attn":false,"bill":true,"notes":""},{"co":"Schwartz/Silver","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Stand - NCE Month","desc":"365 Business Standard - NCE Monthly","unit_price":15.0,"unit_cost":12.6,"qty":29.0,"ext_price":435.0,"margin":69.6,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Schwartz/Silver","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Basic - NCE","desc":"365 Business Basic NCE Monthly","unit_price":7.2,"unit_cost":4.55,"qty":2.0,"ext_price":14.4,"margin":5.3,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Schwartz/Silver","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management - MDR","desc":"MSP systems management","unit_price":5.51,"unit_cost":2.2,"qty":35.0,"ext_price":192.85,"margin":115.85,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Schwartz/Silver","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"OneLogin","desc":"Single Sign-On & Access Management","unit_price":13.23,"unit_cost":6.0,"qty":20.0,"ext_price":264.6,"margin":144.6,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Schwartz/Silver","agr_type":"Recurring Revenue","product_class":"Service","product_id":"365 Cloud Backup","desc":"' 365  Cloud Backup","unit_price":4.2,"unit_cost":1.79,"qty":18.0,"ext_price":75.6,"margin":43.38,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Schwartz/Silver","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"MDR Advanced Malware Protection","desc":"MDR Advanced Malware Protection","unit_price":8.82,"unit_cost":5.4,"qty":35.0,"ext_price":308.7,"margin":119.7,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Schwartz/Silver","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"KnowBe4","desc":"Security Awareness Training","unit_price":2.63,"unit_cost":1.44,"qty":20.0,"ext_price":52.6,"margin":23.8,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Schwartz/Silver","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Print Logic","desc":"Cloud printer management","unit_price":52.5,"unit_cost":50.0,"qty":1.0,"ext_price":52.5,"margin":2.5,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Schwartz/Silver","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Exchange Plan 2 NCE","desc":"Exchange Plan 2","unit_price":9.6,"unit_cost":8.73,"qty":6.0,"ext_price":57.6,"margin":5.22,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Schwartz/Silver","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Duo Essential Security","desc":"Duo Essential Security","unit_price":3.0,"unit_cost":2.7,"qty":32.0,"ext_price":96.0,"margin":9.6,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Schwartz/Silver","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Threat Protect - Huntress","desc":"365 Threat Protection","unit_price":4.0,"unit_cost":2.0,"qty":28.0,"ext_price":112.0,"margin":56.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Schwartz/Silver","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Advanced Patching","desc":"Advanced Patching","unit_price":4.0,"unit_cost":2.0,"qty":40.0,"ext_price":160.0,"margin":80.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Sherbrooke Capital","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"IT consulting - basic support","unit_price":747.0,"unit_cost":0.0,"qty":1.0,"ext_price":747.0,"margin":747.0,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"Sherbrooke Capital","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management","desc":"MSP systems management & AntiVirus","unit_price":5.0,"unit_cost":3.41,"qty":5.0,"ext_price":25.0,"margin":7.95,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Sherbrooke Capital","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Dropbox for Business Advanced","desc":"Dropbox Business","unit_price":30.0,"unit_cost":24.0,"qty":1.0,"ext_price":30.0,"margin":6.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Sherbrooke Capital","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"OneLogin","desc":"Single Sign-On & Access Management","unit_price":8.0,"unit_cost":6.0,"qty":3.0,"ext_price":24.0,"margin":6.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Sherbrooke Capital","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Exchange Plan 1 NCE Monthly","desc":"365 Exchange Plan 1 NCE Monthly","unit_price":4.8,"unit_cost":4.03,"qty":1.0,"ext_price":4.8,"margin":0.77,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Sherbrooke Capital","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Stand - NCE Month","desc":"365 Business Standard - NCE Monthly","unit_price":15.0,"unit_cost":12.6,"qty":2.0,"ext_price":30.0,"margin":4.8,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Sierra Architects","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"Monthly service contact","unit_price":1767.38,"unit_cost":0.0,"qty":1.0,"ext_price":1767.38,"margin":1767.38,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"Sierra Architects","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Barracuda - backup","desc":"Appliance-based cloud backup","unit_price":630.63,"unit_cost":440.0,"qty":1.0,"ext_price":630.63,"margin":190.63,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Sierra Architects","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Mimecast","desc":"Mimecast M2a w/ sync and recover","unit_price":8.0,"unit_cost":6.56,"qty":10.0,"ext_price":80.0,"margin":14.4,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Sierra Architects","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Exchange Plan 1 NCE Monthly","desc":"Microsoft Office 365 Exchange Online plan 1 - monthly","unit_price":4.8,"unit_cost":4.03,"qty":4.0,"ext_price":19.2,"margin":3.08,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Sierra Architects","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Stand - NCE Month","desc":"Microsoft Office 365 Business Standard - monthly","unit_price":15.0,"unit_cost":12.6,"qty":9.0,"ext_price":135.0,"margin":21.6,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Sierra Architects","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"OneLogin","desc":"Single Sign-On & Access Management","unit_price":8.8,"unit_cost":6.0,"qty":9.0,"ext_price":79.2,"margin":25.2,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Sierra Architects","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"MDR Advanced Malware Protection","desc":"MDR Advanced Malware Protection","unit_price":11.02,"unit_cost":5.4,"qty":16.0,"ext_price":176.32,"margin":89.92,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Sierra Architects","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management - MDR","desc":"MSP systems management","unit_price":5.51,"unit_cost":2.2,"qty":30.0,"ext_price":165.3,"margin":99.3,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Sierra Architects","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Advanced Patching","desc":"Advanced Patching","unit_price":4.0,"unit_cost":2.0,"qty":11.0,"ext_price":44.0,"margin":22.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Sierra Architects","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Threat Protect - Huntress","desc":"365 Threat Protection","unit_price":4.0,"unit_cost":2.0,"qty":11.0,"ext_price":44.0,"margin":22.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Sierra Architects","agr_type":"Recurring Revenue","product_class":"Service","product_id":"365 Cloud Backup","desc":"' 365  Cloud Backup","unit_price":4.5,"unit_cost":1.85,"qty":8.0,"ext_price":36.0,"margin":21.2,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Sierra Architects","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Print Logic","desc":"Cloud printer management - 2 printer max","unit_price":31.5,"unit_cost":7.5,"qty":1.0,"ext_price":31.5,"margin":24.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Tappe Architects","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"Monthly Service Contract","unit_price":152.25,"unit_cost":0.0,"qty":25.0,"ext_price":3806.25,"margin":3806.25,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"Tappe Architects","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management - MDR","desc":"MSP systems management","unit_price":3.68,"unit_cost":2.2,"qty":35.0,"ext_price":128.8,"margin":51.8,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Tappe Architects","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Exchange Plan 2 NCE","desc":"Exchange Plan 2","unit_price":9.6,"unit_cost":8.73,"qty":3.0,"ext_price":28.8,"margin":2.61,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Tappe Architects","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Premium - NCE","desc":"365 Business Premium - NCE Monthly","unit_price":26.4,"unit_cost":24.0,"qty":27.0,"ext_price":712.8,"margin":64.8,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Tappe Architects","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Barracuda - backup","desc":"Appliance-based cloud backup","unit_price":630.0,"unit_cost":150.0,"qty":1.0,"ext_price":630.0,"margin":480.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Tappe Architects","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Advanced Patching","desc":"Advanced Patching","unit_price":3.0,"unit_cost":2.0,"qty":30.0,"ext_price":90.0,"margin":30.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Tappe Architects","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"MDR Advanced Malware Protection","desc":"MDR Advanced Malware Protection","unit_price":7.5,"unit_cost":2.9,"qty":35.0,"ext_price":262.5,"margin":161.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Tappe Architects","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Exchange Plan 1 NCE Monthly","desc":"365 Exchange Plan 1 NCE Monthly","unit_price":4.8,"unit_cost":4.03,"qty":4.0,"ext_price":19.2,"margin":3.08,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Tappe Architects","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 E5 (NCE COM MTH)","desc":"Microsoft 365 E5","unit_price":68.4,"unit_cost":54.72,"qty":2.0,"ext_price":136.8,"margin":27.36,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"The iaedp Foundation","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"North Light IT Managed IT Service","unit_price":150.0,"unit_cost":0.0,"qty":11.0,"ext_price":1650.0,"margin":1650.0,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"The iaedp Foundation","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Exchange Plan 1 NCE Monthly","desc":"365 Exchange Plan 1 NCE Monthly","unit_price":4.8,"unit_cost":4.03,"qty":8.0,"ext_price":38.4,"margin":6.16,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"The iaedp Foundation","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Premium - NCE","desc":"365 Business Premium - NCE Monthly","unit_price":26.4,"unit_cost":22.18,"qty":16.0,"ext_price":422.4,"margin":67.52,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"The iaedp Foundation","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"MS Teams Essentials (NCE MTH)","desc":"MS Teams Essentials","unit_price":4.8,"unit_cost":4.03,"qty":1.0,"ext_price":4.8,"margin":0.77,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Torrey Architecture","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"Monthly IT Consulting Retainer","unit_price":731.85,"unit_cost":0.0,"qty":1.0,"ext_price":731.85,"margin":731.85,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"Torrey Architecture","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"System Management","desc":"MSP systems management & AntiVirus","unit_price":5.25,"unit_cost":3.41,"qty":5.0,"ext_price":26.25,"margin":9.2,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Torrey Architecture","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"OneLogin","desc":"Single Sign-On & Access Management","unit_price":12.6,"unit_cost":6.0,"qty":4.0,"ext_price":50.4,"margin":26.4,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Torrey Architecture","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Mimecast","desc":"Mimecast","unit_price":75.0,"unit_cost":56.88,"qty":1.0,"ext_price":75.0,"margin":18.12,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Torrey Architecture","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Business Stand - NCE Month","desc":"365 Business Standard - NCE Monthly","unit_price":15.0,"unit_cost":12.6,"qty":4.0,"ext_price":60.0,"margin":9.6,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Torrey Architecture","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"365 Exchange Plan 2 NCE","desc":"Exchange Plan 2","unit_price":9.6,"unit_cost":8.07,"qty":1.0,"ext_price":9.6,"margin":1.53,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Torrey Architecture","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Dropbox for Business Advanced","desc":"Dropbox Business","unit_price":30.0,"unit_cost":24.0,"qty":5.0,"ext_price":150.0,"margin":30.0,"flags":[],"needs_attn":false,"bill":true,"notes":""},{"co":"Toscano Clements Taylor","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"Monthly Service Contract","desc":"TCT Monthly CIO Consulting Service","unit_price":1500.0,"unit_cost":0.0,"qty":1.0,"ext_price":1500.0,"margin":1500.0,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""},{"co":"The Savings Bank","agr_type":"Recurring Revenue","product_class":"Agreement","product_id":"LiveVault-30day","desc":"GB LiveVault  online backup monthly fee 30 day retention - up to 3TB","unit_price":3445.0,"unit_cost":0.0,"qty":1.0,"ext_price":3445.0,"margin":3445.0,"flags":["costless"],"needs_attn":false,"bill":true,"notes":""}];
+
+// Populate company dropdown
+(function(){
+  const cos = [...new Set(ADDITIONS_DATA.map(r=>r.co))].sort();
+  const sel = document.getElementById('audit-company');
+  cos.forEach(co=>{
+    const opt=document.createElement('option');
+    opt.value=co; opt.textContent=co;
+    sel.appendChild(opt);
+  });
+})();
+
+function renderAdditionsKPIs(){
+  const priceless = ADDITIONS_DATA.filter(r=>r.flags.includes('priceless'));
+  const costless  = ADDITIONS_DATA.filter(r=>r.flags.includes('costless'));
+  const negm      = ADDITIONS_DATA.filter(r=>r.flags.includes('neg_margin'));
+  const attn      = ADDITIONS_DATA.filter(r=>r.needs_attn);
+  const pricelessCost = priceless.reduce((a,r)=>a+r.ext_cost,0);
+  const costlessRev   = costless.reduce((a,r)=>a+r.ext_price,0);
+  const negmLoss      = negm.reduce((a,r)=>a+Math.abs(r.margin),0);
+  document.getElementById('audit-kpi-row').innerHTML=`
+    <div class="audit-kpi kpi-priceless">
+      <div class="audit-kpi-label">Priceless Additions</div>
+      <div class="audit-kpi-value">${priceless.length}</div>
+      <div class="audit-kpi-sub">Cost w/ $0 price &middot; ${Math.round(pricelessCost).toLocaleString()} exposure</div>
+    </div>
+    <div class="audit-kpi kpi-costless">
+      <div class="audit-kpi-label">Costless Additions</div>
+      <div class="audit-kpi-value">${costless.length}</div>
+      <div class="audit-kpi-sub">Billed w/ $0 cost &middot; ${Math.round(costlessRev).toLocaleString()} revenue</div>
+    </div>
+    <div class="audit-kpi kpi-negmargin">
+      <div class="audit-kpi-label">Negative Margin</div>
+      <div class="audit-kpi-value">${negm.length}</div>
+      <div class="audit-kpi-sub">Cost exceeds price &middot; ${Math.round(negmLoss).toLocaleString()} loss</div>
+    </div>
+    <div class="audit-kpi kpi-attn">
+      <div class="audit-kpi-label">Needs Attention</div>
+      <div class="audit-kpi-value">${attn.length}</div>
+      <div class="audit-kpi-sub">Flagged in source data</div>
+    </div>`;
+}
+renderAdditionsKPIs();
+
+function flagLabel(flags, needs_attn){
+  if(flags.includes('priceless'))  return ['priceless','Priceless'];
+  if(flags.includes('costless'))   return ['costless','Costless'];
+  if(flags.includes('neg_margin')) return ['neg_margin','Neg Margin'];
+  if(needs_attn)                   return ['attention','Attention'];
+  return ['clean','Clean'];
+}
+
+function renderAdditionsTable(){
+  const flagFilter = document.getElementById('audit-flag').value;
+  const typeFilter = document.getElementById('audit-type').value;
+  const coFilter   = document.getElementById('audit-company').value;
+  // Default (all) shows only flagged records -- clean is excluded
+  let data = ADDITIONS_DATA.filter(r=>r.flags.length>0||r.needs_attn);
+  if(flagFilter==='priceless')  data=data.filter(r=>r.flags.includes('priceless'));
+  else if(flagFilter==='costless')   data=data.filter(r=>r.flags.includes('costless'));
+  else if(flagFilter==='neg_margin') data=data.filter(r=>r.flags.includes('neg_margin'));
+  else if(flagFilter==='attention')  data=data.filter(r=>r.needs_attn);
+  if(typeFilter!=='all') data=data.filter(r=>r.product_class===typeFilter);
+  if(coFilter!=='all')   data=data.filter(r=>r.co===coFilter);
+  const billFilter = document.getElementById('audit-bill').value;
+  if(billFilter==='true')  data=data.filter(r=>r.bill===true);
+  else if(billFilter==='false') data=data.filter(r=>r.bill===false);
+  const tbody=document.getElementById('audit-tbody');
+  if(!data.length){tbody.innerHTML='<tr><td colspan="10" style="text-align:center;padding:24px;color:var(--text-dim)">No additions match the selected filters.</td></tr>';return;}
+  const fmtN=n=>n===0?'—':'$'+Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  tbody.innerHTML=data.map(r=>{
+    const [fKey,fLabel]=flagLabel(r.flags,r.needs_attn);
+    const mCls=r.margin<0?'neg':r.margin===0?'warn':'pos';
+    return `<tr class="audit-row-${fKey}">
+      <td style="font-size:12px">${r.co}</td>
+      <td><span class="audit-flag-pill pill-${fKey}">${fLabel}</span></td>
+      <td><span class="audit-flag-pill" style="background:${r.bill?'rgba(74,222,128,0.15)':'rgba(248,113,113,0.15)'};color:${r.bill?'#4ade80':'#f87171'};border-color:${r.bill?'rgba(74,222,128,0.4)':'rgba(248,113,113,0.4)'}">${r.bill?'Billable':'Non-Billable'}</span></td>
+      <td style="font-size:12px">${r.desc}</td>
+      <td style="font-size:11px;color:var(--text-muted)">${r.product_id.substring(0,30)}</td>
+      <td class="num" style="font-size:12px">${fmtN(r.unit_price)}</td>
+      <td class="num" style="font-size:12px">${fmtN(r.unit_cost)}</td>
+      <td class="num" style="font-size:12px">${r.qty%1===0?r.qty.toFixed(0):r.qty.toFixed(2)}</td>
+      <td class="num" style="font-size:12px">${fmtN(r.ext_price)}</td>
+      <td class="num ${mCls}" style="font-size:12px">${fmtN(r.margin)}</td>
+      <td class="audit-notes" title="${r.notes}">${r.notes||'—'}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ============================================================
+// CLIENT HEALTH TAB
+// ============================================================
+function getAdditionFlags(coName){
+  // Match by normalized company name (case-insensitive partial match)
+  const coLower = coName.toLowerCase();
+  const matches = ADDITIONS_DATA.filter(r=>r.co.toLowerCase()===coLower||normCo(r.co).toLowerCase()===coLower);
+  const counts={priceless:0,costless:0,neg_margin:0,attention:0};
+  matches.forEach(r=>{
+    if(r.flags.includes('priceless'))  counts.priceless++;
+    else if(r.flags.includes('costless'))   counts.costless++;
+    else if(r.flags.includes('neg_margin')) counts.neg_margin++;
+    if(r.needs_attn) counts.attention++;
+  });
+  return counts;
+}
+
+function renderHealthTab(){
+  const tierFilter = document.getElementById('health-tier-filter').value;
+  const sortBy     = document.getElementById('health-sort').value;
+  // Build client data with tier + addition flags
+  let data = clients.map(c=>{
+    const margin = c.rev>0?(c.gp/c.rev*100):0;
+    let tier;
+    if(c.gp>3000)       tier='platinum';
+    else if(c.gp>1000)  tier='gold';
+    else if(c.gp>=0)    tier='silver';
+    else                tier='atrisk';
+    const addFlags = getAdditionFlags(c.co);
+    const totalFlags = addFlags.priceless+addFlags.costless+addFlags.neg_margin+addFlags.attention;
+    return {...c, margin, tier, addFlags, totalFlags};
+  });
+  // Filter
+  if(tierFilter!=='all') data=data.filter(c=>c.tier===tierFilter);
+  // Sort
+  if(sortBy==='gp-desc')       data.sort((a,b)=>b.gp-a.gp);
+  else if(sortBy==='flags-desc') data.sort((a,b)=>b.totalFlags-a.totalFlags);
+  else                          data.sort((a,b)=>a.co.localeCompare(b.co));
+  // Tier summary
+  const allClients = clients.map(c=>{
+    const gp=c.gp;
+    return gp>3000?'platinum':gp>1000?'gold':gp>=0?'silver':'atrisk';
+  });
+  const tierCounts={platinum:0,gold:0,silver:0,atrisk:0};
+  const tierGP={platinum:0,gold:0,silver:0,atrisk:0};
+  clients.forEach(c=>{
+    const t=c.gp>3000?'platinum':c.gp>1000?'gold':c.gp>=0?'silver':'atrisk';
+    tierCounts[t]++;tierGP[t]+=c.gp;
+  });
+  const tierDefs=[
+    ['platinum','Platinum','GP > $3k'],
+    ['gold','Gold','$1k–$3k'],
+    ['silver','Silver','$0–$1k'],
+    ['atrisk','At Risk','Negative GP'],
+  ];
+  document.getElementById('health-tier-summary').innerHTML=`
+    <div class="section-title">Portfolio Tier Summary</div>
+    <div class="tier-summary-row">
+      ${tierDefs.map(([key,label,desc])=>`
+        <div class="tier-summary-card">
+          <div class="ts-label"><span class="tier-badge tier-${key}">${label}</span></div>
+          <div class="ts-count" style="color:${key==='atrisk'?'#f87171':key==='silver'?'#94a3b8':key==='gold'?'#fbbf24':'#c084fc'}">${tierCounts[key]}</div>
+          <div class="ts-gp">${fmt(tierGP[key])} GP &middot; ${desc}</div>
+        </div>`).join('')}
+    </div>`;
+  // Cards
+  const gpColor=gp=>gp<0?'#f87171':gp>3000?'#c084fc':gp>1000?'#fbbf24':'#94a3b8';
+  document.getElementById('health-cards-grid').innerHTML=data.map(c=>{
+    const flagChips=[];
+    if(c.gp<0) flagChips.push('<span class="flag-chip flag-neg-gp">Neg GP</span>');
+    if(c.addFlags.priceless>0)  flagChips.push(`<span class="flag-chip flag-priceless">${c.addFlags.priceless} Priceless</span>`);
+    if(c.addFlags.costless>0)   flagChips.push(`<span class="flag-chip flag-costless">${c.addFlags.costless} Costless</span>`);
+    if(c.addFlags.neg_margin>0) flagChips.push(`<span class="flag-chip flag-neg-margin">${c.addFlags.neg_margin} Neg Margin</span>`);
+    if(c.addFlags.attention>0)  flagChips.push(`<span class="flag-chip flag-attention">${c.addFlags.attention} Attention</span>`);
+    const flagsHtml=flagChips.length?`<div class="health-flags">${flagChips.join('')}</div>`:'';
+    return `<div class="health-card">
+      <div class="health-card-header">
+        <div class="health-card-name">${c.co}</div>
+        <div class="health-card-gp" style="color:${gpColor(c.gp)}">${fmt(c.gp)}</div>
+      </div>
+      <div style="margin-bottom:8px"><span class="tier-badge tier-${c.tier}">${c.tier.charAt(0).toUpperCase()+c.tier.slice(1)}</span></div>
+      <div class="health-card-stats">
+        <div><div class="health-stat-label">Revenue</div><div class="health-stat-value">${fmt(c.rev)}</div></div>
+        <div><div class="health-stat-label">GP Margin</div><div class="health-stat-value">${c.rev>0?c.margin.toFixed(1)+'%':'—'}</div></div>
+        <div><div class="health-stat-label">Labor Cost</div><div class="health-stat-value">${c.timeCost>0?fmt(c.timeCost):'—'}</div></div>
+        <div><div class="health-stat-label">Billable Hrs</div><div class="health-stat-value">${c.hrs.toFixed(1)}</div></div>
+      </div>
+      ${flagsHtml}
+    </div>`;
+  }).join('');
+}
+
+const _origSwitchTab = switchTab;
+
+</script>
+</body>
+</html>
